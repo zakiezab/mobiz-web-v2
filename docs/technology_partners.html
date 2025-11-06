@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Technology & Partners | Mobiz</title>
+    <style>
+        /* Re-using all styles from the main site */
+        @import url('https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@200;300;400;500;600&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary: #D8242A;
+            --primary-dark: #B01E23;
+            --secondary: #613BFE;
+            --dark: #0A0A0A;
+            --white: #FFFFFF;
+            --gray-50: #FAFAFA;
+            --gray-100: #F4F4F4;
+            --gray-200: #E0E0E0;
+            --gray-400: #A1A1A1;
+            --gray-500: #737373;
+            --gray-600: #525252;
+            --gray-700: #303030;
+            --gray-800: #1A1A1A;
+            --gray-900: #0A0A0A;
+            --space-lg: 40px;
+            --space-xl: 64px;
+        }
+        
+        body {
+            font-family: 'Libre Franklin', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--gray-800);
+            background: var(--white);
+            font-weight: 300;
+            line-height: 1.6;
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+        
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            padding: 28px 0;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 80px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--primary);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 48px;
+        }
+        
+        .nav-menu a {
+            color: var(--gray-700);
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 14px;
+            letter-spacing: 0.01em;
+            transition: color 0.2s ease;
+        }
+        
+        .nav-menu a:hover {
+            color: var(--dark);
+        }
+
+        /* Page Hero */
+        .page-hero {
+            padding: 200px 0 120px;
+            background: var(--white);
+        }
+        
+        .page-hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 80px;
+        }
+        
+        .page-label {
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--secondary);
+            margin-bottom: 32px;
+        }
+        
+        .page-title {
+            font-size: clamp(48px, 5vw, 72px);
+            font-weight: 200;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            color: var(--dark);
+            margin-bottom: 32px;
+        }
+        
+        .page-title strong {
+            font-weight: 500;
+            color: var(--primary);
+        }
+        
+        .page-description {
+            font-size: 22px;
+            font-weight: 300;
+            line-height: 1.5;
+            color: var(--gray-600);
+            max-width: 720px;
+        }
+
+        /* Content Section */
+        .content {
+            padding: 120px 0;
+            background: var(--gray-50);
+        }
+        
+        .content-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 80px;
+        }
+
+        .section-title {
+            font-size: 40px;
+            font-weight: 200;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+            color: var(--dark);
+            margin-bottom: 20px;
+        }
+
+        .content-text {
+            font-size: 18px;
+            font-weight: 300;
+            color: var(--gray-600);
+            max-width: 720px;
+            margin-bottom: var(--space-xl);
+        }
+
+        /* Partner Grid */
+        .partner-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: var(--space-lg);
+            border-top: 1px solid var(--gray-200);
+            padding-top: var(--space-xl);
+        }
+
+        .partner-item {
+            padding: 32px;
+            background: var(--white);
+            border: 1px solid var(--gray-100);
+            border-radius: 2px;
+            text-align: center;
+        }
+
+        .partner-logo {
+            height: 40px;
+            margin-bottom: 24px;
+            /* In a real build, this would be an <img> */
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--gray-100);
+        }
+
+        .partner-specialization {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--gray-700);
+            margin-bottom: 8px;
+        }
+
+        .partner-description {
+            font-size: 12px;
+            font-weight: 300;
+            color: var(--gray-600);
+            line-height: 1.5;
+        }
+
+        /* Footer */
+        .footer {
+            padding: 80px 0 40px;
+            background: var(--dark);
+            color: var(--gray-400);
+        }
+        
+        .footer-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 80px;
+        }
+        
+        .footer-copyright {
+            font-size: 13px;
+            color: var(--gray-600);
+            text-align: center;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-menu { display: none; }
+            .page-title { font-size: 36px; }
+            .page-description { font-size: 18px; }
+            .nav-container,
+            .page-hero-container,
+            .content-container,
+            .footer-container {
+                padding: 0 40px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav" id="navigation">
+        <div class="nav-container">
+            <a href="Homepage_vNext.html" class="logo">mobiz</a>
+            <ul class="nav-menu">
+                <li><a href="HowWeWork_vNext.html">Our Model</a></li>
+                <li><a href="Homepage_vNext.html#services">Execution</a></li>
+                <li><a href="Homepage_vNext.html#delivered">Delivered Value</a></li>
+                <li><a href="Homepage_vNext.html#industries">Industries</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="page-hero">
+        <div class="page-hero-container">
+            <div class="page-label">Our Philosophy</div>
+            <h1 class="page-title">Technology-Agnostic. <strong>Ecosystem-Deep.</strong></h1>
+            <p class="page-description">
+                Our model is built on first-principles engineering. We recommend the right stack for your unique constraints and goals, not our partner quotas.
+            </p>
+        </div>
+    </section>
+
+    <!-- Content -->
+    <section class="content">
+        <div class="content-container">
+            <h2 class="section-title">Enterprise-Ready Expertise</h2>
+            <p class="content-text">
+                To deliver with certainty, our teams maintain deep, certified expertise across the mission-critical platforms our clients rely on. This ensures seamless execution, deep integration, and full compliance with enterprise audit requirements.
+            </p>
+
+            <div class="partner-grid">
+                <!-- This is a placeholder for Microsoft -->
+                <div class="partner-item">
+                    <div class="partner-logo" style="color: #0067B8;">Microsoft</div>
+                    <div class="partner-specialization">Azure Solutions Partner</div>
+                    <div class="partner-description">Specializations in: Data & AI, Digital & App Innovation, Infrastructure.</div>
+                </div>
+
+                <!-- This is a placeholder for AWS -->
+                <div class="partner-item">
+                    <div class="partner-logo" style="color: #FF9900;">AWS</div>
+                    <div class="partner-specialization">Advanced Tier Partner</div>
+                    <div class="partner-description">Competencies in: Migration, Data & Analytics, DevOps.</div>
+                </div>
+
+                <!-- This is a placeholder for GCP -->
+                <div class="partner-item">
+                    <div class="partner-logo" style="color: #4285F4;">Google Cloud</div>
+                    <div class="partner-specialization">Premier Partner</div>
+                    <div class="partner-description">Expertise in: Cloud-Native Development, ML, Data Analytics.</div>
+                </div>
+
+                <!-- This is a placeholder for Databricks -->
+                <div class="partner-item">
+                    <div class="partner-logo" style="color: #FF3621;">Databricks</div>
+                    <div class="partner-specialization">Elite Partner</div>
+                    <div class="partner-description">Certified expertise in the Data Intelligence Platform.</div>
+                </div>
+
+                <!-- Add other partners as needed -->
+                <div class="partner-item">
+                    <div class="partner-logo" style="color: #00A1E0;">Snowflake</div>
+                    <div class="partner-specialization">Select Partner</div>
+                    <div class="partner-description">Data Cloud implementation and migration specialists.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-copyright">
+                © 2025 Mobiz. Strategy, Executed.
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
+

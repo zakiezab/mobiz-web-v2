@@ -1,0 +1,266 @@
+import { groq } from "next-sanity";
+
+export const SERVICE_PAGE_QUERY = groq`
+  *[_type == "servicePage" && slug.current == $slug][0]{
+    _id,
+    title,
+    "slug": slug.current,
+    kicker,
+    heroHeadline,
+    heroSubheadline,
+    problemHeadline,
+    problemDescription,
+    solutionDescription,
+    capabilities[]{
+      title,
+      description
+    },
+    proofKicker,
+    proofMetric,
+    proofContext,
+    proofBody,
+    proofCaseStudyLink->{
+      title,
+      "slug": slug.current,
+      kicker,
+      metricLarge,
+      metricContext
+    },
+    ctaHeadline,
+    ctaBody,
+    metaTitle,
+    metaDescription
+  }
+`;
+
+export const CASE_STUDIES_QUERY = groq`
+  *[_type == "caseStudy"] | order(_createdAt desc){
+    _id,
+    title,
+    "slug": slug.current,
+    kicker,
+    cardHeadline,
+    metricLarge,
+    metricContext,
+    industry,
+    executionType,
+    featuredImage{
+      asset->{
+        _id,
+        url,
+        altText
+      }
+    }
+  }
+`;
+
+export const CASE_STUDY_QUERY = groq`
+  *[_type == "caseStudy" && slug.current == $slug][0]{
+    _id,
+    title,
+    "slug": slug.current,
+    kicker,
+    cardHeadline,
+    metricLarge,
+    metricContext,
+    industry,
+    executionType,
+    challenge,
+    solution,
+    results,
+    technologiesUsed,
+    featuredImage{
+      asset->{
+        _id,
+        url,
+        altText
+      }
+    },
+    seo{
+      title,
+      description
+    }
+  }
+`;
+
+export const ENGAGEMENT_MODELS_QUERY = groq`
+  *[_type == "engagementModel"] | order(_createdAt asc){
+    _id,
+    title,
+    summary,
+    pillars,
+    ctaLabel
+  }
+`;
+
+export const TECHNOLOGY_PARTNERS_QUERY = groq`
+  *[_type == "technologyPartner"] | order(name asc){
+    _id,
+    name,
+    logo{
+      asset->{
+        _id,
+        url,
+        altText
+      }
+    },
+    website,
+    excerpt,
+    categories
+  }
+`;
+
+export const ARTICLES_QUERY = groq`
+  *[_type == "article"] | order(publishedAt desc){
+    _id,
+    title,
+    "slug": slug.current,
+    publishedAt,
+    excerpt,
+    heroImage{
+      asset->{
+        _id,
+        url,
+        altText
+      }
+    },
+    seo{
+      title,
+      description
+    }
+  }
+`;
+
+export const ARTICLE_QUERY = groq`
+  *[_type == "article" && slug.current == $slug][0]{
+    _id,
+    _updatedAt,
+    title,
+    "slug": slug.current,
+    publishedAt,
+    excerpt,
+    heroImage{
+      asset->{
+        _id,
+        url,
+        altText
+      }
+    },
+    body,
+    seo{
+      title,
+      description,
+      ogImage{
+        asset->{
+          _id,
+          url
+        }
+      }
+    }
+  }
+`;
+
+export const EXECUTION_PAGE_QUERY = groq`
+  *[_type == "executionPage"][0]{
+    _id,
+    title,
+    metaTitle,
+    metaDescription,
+    heroKicker,
+    heroHeadline,
+    heroSubheadline,
+    servicesLabel,
+    servicesTitle,
+    servicesDescription,
+    services[]{
+      number,
+      title,
+      description,
+      outcome
+    },
+    ctaHeadline,
+    ctaBody,
+    ctaLabel
+  }
+`;
+
+export const DELIVERED_VALUE_PAGE_QUERY = groq`
+  *[_type == "deliveredValuePage"][0]{
+    _id,
+    title,
+    metaTitle,
+    metaDescription,
+    heroKicker,
+    heroHeadline,
+    heroSubheadline,
+    storiesLabel,
+    storiesTitle,
+    stories[]{
+      client,
+      metricValue,
+      metricContext,
+      description,
+      videoLink{
+        href,
+        label
+      }
+    },
+    ctaHeadline,
+    ctaBody,
+    ctaLabel
+  }
+`;
+
+export const HOMEPAGE_QUERY = groq`
+  *[_type == "homepage"][0]{
+    _id,
+    heroMetrics[]{
+      value,
+      label
+    },
+    statsItems,
+    accountabilityGapTitle,
+    accountabilityGapBody,
+    modelItems[]{
+      number,
+      title,
+      description
+    },
+    deliveredStories[]{
+      client,
+      metricValue,
+      metricContext,
+      description,
+      videoLink{
+        href,
+        label
+      }
+    },
+    recognitionItems[]{
+      label,
+      title,
+      source
+    },
+    services[]{
+      number,
+      title,
+      description,
+      outcome
+    },
+    partners[]{
+      name,
+      color
+    },
+    industries[]{
+      name,
+      description
+    },
+    contactTitle,
+    contactDescription,
+    contactCtaLabel,
+    seo{
+      title,
+      description
+    }
+  }
+`;

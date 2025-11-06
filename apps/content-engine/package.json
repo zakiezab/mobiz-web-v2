@@ -1,0 +1,12 @@
+{
+  "name": "@mobiz/content-engine",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "echo 'Content engine service not yet implemented'",
+    "build": "echo 'No build step yet'",
+    "start": "echo 'No runtime yet'"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

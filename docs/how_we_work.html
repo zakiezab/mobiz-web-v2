@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Model | Mobiz</title>
+    <!-- Re-using all styles from the original file -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@200;300;400;500;600&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary: #D8242A;
+            --primary-dark: #B01E23;
+            --secondary: #613BFE;
+            --dark: #0A0A0A;
+            --white: #FFFFFF;
+            --gray-50: #FAFAFA;
+            --gray-100: #F4F4F4;
+            --gray-200: #E0E0E0;
+            --gray-400: #A1A1A1;
+            --gray-500: #737373;
+            --gray-600: #525252;
+            --gray-700: #303030;
+            --gray-800: #1A1A1A;
+            --gray-900: #0A0A0A;
+            --space-xs: 8px;
+            --space-sm: 16px;
+            --space-md: 24px;
+            --space-lg: 40px;
+            --space-xl: 64px;
+            --space-2xl: 96px;
+            --space-3xl: 160px;
+        }
+        
+        body {
+            font-family: 'Libre Franklin', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--gray-800);
+            background: var(--white);
+            font-weight: 300;
+            line-height: 1.6;
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+        
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            padding: 28px 0;
+            transition: all 0.3s ease;
+        }
+        
+        .nav.scrolled {
+            padding: 20px 0;
+            box-shadow: 0 1px 0 rgba(0,0,0,0.04);
+        }
+        
+        .nav-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 80px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--primary);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 48px;
+        }
+        
+        .nav-menu a {
+            color: var(--gray-700);
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 14px;
+            letter-spacing: 0.01em;
+            transition: color 0.2s ease;
+        }
+        
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            color: var(--dark);
+        }
+        
+        /* Hero */
+        .page-hero {
+            padding: 200px 0 120px;
+            background: var(--white);
+        }
+        
+        .page-hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 80px;
+        }
+        
+        .page-label {
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--secondary);
+            margin-bottom: 32px;
+        }
+        
+        .page-title {
+            font-size: clamp(48px, 5vw, 72px);
+            font-weight: 200;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            color: var(--dark);
+            margin-bottom: 32px;
+        }
+        
+        .page-title strong {
+            font-weight: 500;
+            color: var(--primary);
+        }
+        
+        .page-description {
+            font-size: 22px;
+            font-weight: 300;
+            line-height: 1.5;
+            color: var(--gray-600);
+            max-width: 720px;
+        }
+        
+        /* Process Timeline */
+        .timeline {
+            padding: 120px 0;
+            background: var(--gray-50);
+        }
+        
+        .timeline-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 80px;
+        }
+        
+        .timeline-header {
+            max-width: 900px;
+            margin-bottom: 80px;
+        }
+        
+        .section-label {
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--secondary);
+            margin-bottom: 20px;
+        }
+        
+        .section-title {
+            font-size: 40px;
+            font-weight: 200;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+            color: var(--dark);
+        }
+        
+        .timeline-grid {
+            position: relative;
+        }
+        
+        .timeline-line {
+            position: absolute;
+            left: 40px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--gray-200);
+        }
+        
+        .timeline-item {
+            display: grid;
+            grid-template-columns: 80px 1fr;
+            gap: 60px;
+            margin-bottom: 80px;
+            position: relative;
+        }
+        
+        .timeline-marker {
+            width: 80px;
+            height: 80px;
+            background: var(--white);
+            border: 2px solid var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--primary);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .timeline-content {
+            padding-top: 16px;
+        }
+        
+        .timeline-phase {
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--gray-500);
+            margin-bottom: 12px;
+        }
+        
+        .timeline-title {
+            font-size: 28px;
+            font-weight: 400;
+            color: var(--dark);
+            margin-bottom: 16px;
+        }
+        
+        .timeline-description {
+            font-size: 16px;
+            font-weight: 300;
+            line-height: 1.6;
+            color: var(--gray-600);
+            margin-bottom: 24px;
+        }
+        
+        .timeline-deliverables {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        
+        .deliverable {
+            font-size: 14px;
+            color: var(--gray-700);
+            padding: 8px 16px;
+            background: var(--white);
+            border: 1px solid var(--gray-200);
+            border-radius: 2px;
+        }
+        
+        /* Principles */
+        .principles {
+            padding: 120px 0;
+            background: var(--white);
+        }
+        
+        .principles-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 80px;
+        }
+        
+        .principles-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 64px;
+            margin-top: 80px;
+        }
+        
+        .principle {
+            padding-top: 32px;
+            border-top: 2px solid var(--primary);
+        }
+        
+        .principle-title {
+            font-size: 24px;
+            font-weight: 500;
+            color: var(--dark);
+            margin-bottom: 16px;
+        }
+        
+        .principle-description {
+            font-size: 16px;
+            font-weight: 300;
+            line-height: 1.6;
+            color: var(--gray-600);
+        }
+        
+        /* Engagement Model (REMOVED - This is now on the "Execution" page) */
+        
+        /* Difference (REMOVED - This is replaced by the "Principles" section) */
+
+        /* CTA */
+        .cta {
+            padding: 120px 0;
+            background: var(--gray-50);
+        }
+        
+        .cta-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 80px;
+            text-align: center;
+        }
+        
+        .cta h2 {
+            font-size: 40px;
+            font-weight: 200;
+            line-height: 1.2;
+            color: var(--dark);
+            margin-bottom: 32px;
+        }
+        
+        .cta-description {
+            font-size: 18px;
+            font-weight: 300;
+            line-height: 1.6;
+            color: var(--gray-600);
+            max-width: 720px;
+            margin: 0 auto 48px;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--white);
+            background: var(--primary);
+            text-decoration: none;
+            padding: 18px 40px;
+            border-radius: 2px;
+            transition: all 0.2s ease;
+        }
+        
+        .cta-button:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(216, 36, 42, 0.2);
+        }
+        
+        /* Footer */
+        .footer {
+            padding: 80px 0 40px;
+            background: var(--dark);
+            color: var(--gray-400);
+        }
+        
+        .footer-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 80px;
+        }
+        
+        .footer-copyright {
+            font-size: 13px;
+            color: var(--gray-600);
+            text-align: center;
+        }
+        
+        @media (max-width: 1024px) {
+            .timeline-grid,
+            .principles-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .timeline-item {
+                grid-template-columns: 60px 1fr;
+                gap: 40px;
+            }
+            
+            .timeline-line {
+                left: 30px;
+            }
+            
+            .timeline-marker {
+                width: 60px;
+                height: 60px;
+                font-size: 18px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+            
+            .page-title {
+                font-size: 36px;
+            }
+            
+            .page-description {
+                font-size: 18px;
+            }
+            
+            .nav-container,
+            .page-hero-container,
+            .timeline-container,
+            .principles-container,
+            .cta-container {
+                padding: 0 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav" id="navigation">
+        <div class="nav-container">
+            <a href="Homepage_vNext.html" class="logo">mobiz</a>
+            
+            <ul class="nav-menu">
+                <li><a href="HowWeWork_vNext.html" class="active">Our Model</a></li>
+                <li><a href="Homepage_vNext.html#services">Execution</a></li>
+                <li><a href="Homepage_vNext.html#delivered">Delivered Value</a></li>
+                <li><a href="Homepage_vNext.html#industries">Industries</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="page-hero">
+        <div class="page-hero-container">
+            <!-- NEW HERO COPY -->
+            <div class="page-label">Our Model</div>
+            <h1 class="page-title">The Path to <strong>Production.</strong></h1>
+            <p class="page-description">
+                We close the accountability gap with a single, integrated model that owns the outcome from architecture to production. No handoffs. No excuses. Just a guaranteed result.
+            </p>
+        </div>
+    </section>
+
+    <!-- Timeline -->
+    <section class="timeline">
+        <div class="timeline-container">
+            <div class="timeline-header">
+                <!-- NEW TIMELINE COPY -->
+                <div class="section-label">One Team. One Outcome.</div>
+                <h2 class="section-title">How we turn strategy into a production system.</h2>
+            </div>
+            
+            <div class="timeline-grid">
+            <div class="timeline-line"></div>
+            
+            <div class="timeline-item">
+                <div class="timeline-marker">01</div>
+                <div class="timeline-content">
+                    <!-- NEW COPY -->
+                    <div class="timeline-phase">Phase 01</div>
+                    <h3 class="timeline-title">Clarity: Strategic Architecture</h3>
+                    <p class="timeline-description">
+                        We start by defining the "physics" of the problem. We build a technology-agnostic architecture and an **execution roadmap** designed for your specific reality, constraints, and business case.
+                    </p>
+                    <div class="timeline-deliverables">
+                        <div class="deliverable">First-Principles Architecture</div>
+                        <div class="deliverable">Technology-Agnostic Roadmap</div>
+                        <div class="deliverable">Production Roadmap</div>
+                        <div class="deliverable">Fixed-Scope Business Case</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-marker">02</div>
+                <div class="timeline-content">
+                    <!-- NEW COPY -->
+                    <div class="timeline-phase">Phase 02</div>
+                    <h3 class="timeline-title">Velocity: Full-Stack Execution</h3>
+                    <p class="timeline-description">
+                        The team that designed the architecture begins building. We eliminate the friction of handoffs. We run parallel workstreams across infrastructure, data, and applications to deliver value with velocity.
+                    </p>
+                        <!-- CORRECTED DELIVERABLES FOR PHASE 02 -->
+                        <div class="timeline-deliverables">
+                            <div class="deliverable">Production-Ready Code</div>
+                            <div class="deliverable">System & Data Integration</div>
+                            <div class="deliverable">CI/CD & DevOps Automation</div>
+                            <div class="deliverable">Continuous Validation</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                <div class="timeline-marker">03</div>
+                <div class="timeline-content">
+                    <!-- NEW COPY -->
+                    <div class="timeline-phase">Phase 03</div>
+                    <h3 class="timeline-title">Certainty: Production Deployment</h3>
+                    <p class="timeline-description">
+                        We manage the "last mile" that others ignore. We own the deployment, data migration, and security validation. Our work is not done until your system is live and operating at scale.
+                    </p>
+                    <!-- CORRECTED DELIVERABLES FOR PHASE 03 -->
+                    <div class="timeline-deliverables">
+                            <div class="deliverable">Zero-Downtime Deployment</div>
+                            <div class="deliverable">Data Migration & Validation</div>
+                            <div class="deliverable">Security & Pen Testing</div>
+                            <div class="deliverable">Performance Tuning</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                <div class="timeline-marker">03</div>
+                <div class="timeline-content">
+                    <!-- NEW COPY -->
+                    <div class="timeline-phase">Phase 03</div>
+                    <h3 class="timeline-title">Certainty: Production Deployment</h3>
+                    <p class="timeline-description">
+                        We manage the "last mile" that others ignore. We own the deployment, data migration, and security validation. Our work is not done until your system is live and operating at scale.
+                    </p>
+                    <div class="timeline-deliverables">
+                            <div class="deliverable">Production-Ready Code</div>
+                            <div class="deliverable">System & Data Integration</div>
+                            <div class="deliverable">CI/CD & DevOps Automation</div>
+                            <div class="deliverable">Continuous Validation</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                <div class="timeline-marker">04</div>
+                <div class="timeline-content">
+                    <!-- NEW COPY -->
+                    <div class="timeline-phase">Phase 04</div>
+                    <h3 class="timeline-title">Scale: Guaranteed Outcome</h3>
+                    <p class="timeline-description">
+                        We validate the outcome against the original business case. We optimize for scale and enable your teams to own the new platform, ensuring the transformation is sustainable.
+                    </p>
+                        <div class="timeline-deliverables">
+                            <div class="deliverable">Production @ Scale</div>
+                            <div class="deliverable">Team Enablement & Handoff</div>
+                            <div class="deliverable">FinOps & Cost Optimization</div>
+                            <div class="deliverable">ROI & Business Case Validation</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Principles -->
+    <section class="principles">
+        <div class="principles-container">
+            <div class="timeline-header">
+                <!-- NEW PRINCIPLES COPY -->
+                <div class="section-label">How We Execute</div>
+                <h2 class="section-title">Our execution principles.</h2>
+            </div>
+            
+            <div class="principles-grid">
+                <div class="principle">
+                    <!-- NEW COPY -->
+                    <h3 class="principle-title">Zero Handoffs</h3>
+                    <p class="principle-description">
+                        The senior team that architects the solution is the senior team that builds it. No knowledge loss. No excuses. 100% accountability.
+                    </p>
+                </div>
+                
+                <div class="principle">
+                    <!-- NEW COPY -->
+                    <h3 class="principle-title">Technology Agnostic</h3>
+                    <p class="principle-description">
+                        Our recommendations are based on first principles and your reality, not partner quotas. We build what works.
+                    </p>
+                </div>
+                
+                <div class="principle">
+                    <!-- NEW COPY -->
+                    <h3 class="principle-title">Velocity over Volume</h3>
+                    <p class="principle-description">
+                        We deploy small, senior teams who compress timelines. We measure progress in production code, not billable hours.
+                    </p>
+                </div>
+                
+                <div class="principle">
+                    <!-- NEW COPY -->
+                    <h3 class="principle-title">Outcome Guaranteed</h3>
+                    <p class="principle-description">
+                        We are not a staff augmentation firm. We commit to a fixed-scope outcome, and we deliver it. Our success is your production system.
+                    </p>
+                </div>
+                
+                <div class="principle">
+                    <!-- NEW COPY -->
+                    <h3 class="principle-title">Full-Stack Ownership</h3>
+                    <p class="principle-description">
+                        From the C-Suite presentation to the codebase commit. We operate and are accountable at every layer of the stack.
+                    </p>
+                </div>
+                
+                <div class="principle">
+                    <!-- NEW COPY -->
+                    <h3 class="principle-title">Built for Reality</h3>
+                    <p class="principle-description">
+                        We build solutions that navigate your real-world constraints: legacy tech, compliance, politics, and budgets.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta">
+        <div class="cta-container">
+            <!-- NEW CTA COPY -->
+            <h2>An Outcome, Not an Opinion.</h2>
+            <p class="cta-description">
+                Stop buying recommendations. Start delivering results. We're ready to build.
+            </p>
+            <a href="Homepage_vNext.html#contact" class="cta-button">Start the Conversation</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-copyright">
+                <!-- NEW FOOTER COPY -->
+                © 2025 Mobiz. Strategy, Executed.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navigation scroll effect
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navigation');
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+</html>
+
+
+

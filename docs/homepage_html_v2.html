@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobiz | Execution Partner</title>
+    <style>
+        /* This CSS is identical to your v3 draft, ensuring the design remains consistent */
+        @import url('https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@200;300;400;500;600&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #D8242A;
+            --primary-dark: #B01E23;
+            --secondary: #613BFE;
+            --dark: #0A0A0A;
+            --white: #FFFFFF;
+            --gray-50: #FAFAFA;
+            --gray-100: #F4F4F4;
+            --gray-200: #E0E0E0;
+            --gray-400: #A1A1A1;
+            --gray-500: #737373;
+            --gray-600: #525252;
+            --gray-700: #303030;
+            --gray-800: #1A1A1A;
+            --gray-900: #0A0A0A;
+            --space-xs: 8px; --space-sm: 16px; --space-md: 24px; --space-lg: 40px; --space-xl: 64px; --space-2xl: 96px; --space-3xl: 160px;
+        }
+        body {
+            font-family: 'Libre Franklin', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--gray-800); background: var(--white); font-weight: 300; line-height: 1.6; font-size: 16px;
+            -webkit-font-smoothing: antialiased; overflow-x: hidden; opacity: 0; transition: opacity 0.4s ease;
+        }
+        body.loaded { opacity: 1; }
+        
+        /* Navigation */
+        .nav { position: fixed; top: 0; left: 0; right: 0; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(20px); z-index: 1000; padding: 28px 0; transition: all 0.3s ease; }
+        .nav.scrolled { padding: 20px 0; box-shadow: 0 1px 0 rgba(0,0,0,0.04); }
+        .nav-container { max-width: 1600px; margin: 0 auto; padding: 0 80px; display: flex; align-items: center; justify-content: space-between; }
+        .logo { font-size: 24px; font-weight: 600; color: var(--primary); text-decoration: none; letter-spacing: -0.02em; }
+        .nav-menu { display: flex; list-style: none; gap: 48px; }
+        .nav-menu a { color: var(--gray-700); text-decoration: none; font-weight: 400; font-size: 14px; letter-spacing: 0.01em; transition: color 0.2s ease; }
+        .nav-menu a:hover { color: var(--dark); }
+        .nav-contact { font-size: 14px; font-weight: 500; color: var(--dark); text-decoration: none; padding: 12px 28px; border: 1.5px solid var(--dark); border-radius: 2px; transition: all 0.2s ease; }
+        .nav-contact:hover { background: var(--dark); color: var(--white); }
+        
+        /* Hero */
+        .hero { min-height: 100vh; display: flex; align-items: center; padding: 180px 0 120px; background: var(--white); }
+        .hero-container { max-width: 1600px; margin: 0 auto; padding: 0 80px; }
+        .hero-content { max-width: 900px; }
+        
+        /* NEW HERO COPY */
+        .hero h1 { font-size: clamp(48px, 5vw, 72px); font-weight: 200; line-height: 1.1; letter-spacing: -0.02em; color: var(--dark); margin-bottom: 32px; }
+        .hero h1 strong { font-weight: 500; color: var(--primary); }
+        .hero-description { font-size: 22px; font-weight: 300; line-height: 1.5; color: var(--gray-600); max-width: 720px; margin-bottom: 48px; }
+        .hero-cta { display: inline-block; font-size: 15px; font-weight: 500; color: var(--white); background: var(--primary); text-decoration: none; padding: 18px 40px; border-radius: 2px; transition: all 0.2s ease; }
+        .hero-cta:hover { background: var(--primary-dark); transform: translateY(-2px); box-shadow: 0 12px 32px rgba(216, 36, 42, 0.2); }
+        
+        /* Stats */
+        .stats { padding: 64px 0; background: var(--gray-50); border-top: 1px solid var(--gray-100); border-bottom: 1px solid var(--gray-100); }
+        .stats-container { max-width: 1600px; margin: 0 auto; padding: 0 80px; text-align: center; }
+        .stats-label { font-size: 12px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gray-500); margin-bottom: 24px; }
+        .stats-grid { display: flex; justify-content: center; align-items: center; gap: 48px; flex-wrap: wrap; }
+        .stat-item { font-size: 14px; font-weight: 400; color: var(--gray-600); }
+        
+        /* Philosophy (Now "The Accountability Gap") */
+        .philosophy { padding: 160px 0; background: var(--white); }
+        .philosophy-container { max-width: 1200px; margin: 0 auto; padding: 0 80px; text-align: center; }
+        /* NEW H2 COPY */
+        .philosophy h2 { font-size: 48px; font-weight: 200; line-height: 1.2; letter-spacing: -0.02em; color: var(--dark); margin-bottom: 32px; }
+        /* NEW P COPY */
+        .philosophy-text { font-size: 20px; font-weight: 300; line-height: 1.6; color: var(--gray-600); max-width: 900px; margin: 0 auto 48px; }
+        .philosophy-text strong { font-weight: 500; color: var(--primary); }
+        
+        /* Delivery Model */
+        .model { padding: 160px 0; background: var(--gray-50); }
+        .model-container { max-width: 1600px; margin: 0 auto; padding: 0 80px; }
+        .section-header { max-width: 900px; margin-bottom: 80px; }
+        .section-label { font-size: 12px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--secondary); margin-bottom: 20px; }
+        .section-title { font-size: 40px; font-weight: 200; line-height: 1.2; letter-spacing: -0.02em; color: var(--dark); margin-bottom: 20px; }
+        .section-description { font-size: 18px; font-weight: 300; color: var(--gray-600); max-width: 720px; }
+        .model-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 64px; }
+        .model-item { padding-top: 32px; border-top: 2px solid var(--primary); }
+        .model-number { font-size: 12px; font-weight: 600; letter-spacing: 0.1em; color: var(--gray-500); margin-bottom: 20px; }
+        .model-title { font-size: 24px; font-weight: 400; color: var(--dark); margin-bottom: 16px; }
+        .model-description { font-size: 16px; font-weight: 300; line-height: 1.6; color: var(--gray-600); }
+        
+        /* Delivered */
+        .delivered { padding: 160px 0; background: var(--white); }
+        .delivered-container { max-width: 1600px; margin: 0 auto; padding: 0 80px; }
+        .delivered-header { margin-bottom: 80px; }
+        .delivered-label { font-size: 12px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--secondary); display: block; margin-bottom: 16px; }
+        .delivered-title { font-size: 40px; font-weight: 200; line-height: 1.2; color: var(--dark); }
+        .delivered-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 64px; }
+        .delivery-story { padding: 40px; background: var(--gray-50); border-radius: 2px; transition: all 0.3s ease; }
+        .delivery-story:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08); }
+        .delivery-client { font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray-500); margin-bottom: 20px; }
+        .delivery-metric { margin-bottom: 20px; display: flex; align-items: baseline; gap: 8px; }
+        .metric-highlight { font-size: 48px; font-weight: 300; color: var(--primary); line-height: 1; }
+        .metric-context { font-size: 14px; color: var(--gray-600); font-weight: 400; }
+        .delivery-description { font-size: 14px; line-height: 1.6; color: var(--gray-700); font-weight: 300; }
+        
+        /* Recognition */
+        .recognition { padding: 64px 0; background: var(--dark); }
+        .recognition-container { max-width: 1600px; margin: 0 auto; padding: 0 80px; }
+        .recognition-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 64px; }
+        .recognition-item { text-align: center; }
+        .recognition-label { font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray-500); margin-bottom: 8px; }
+        .recognition-title { font-size: 20px; font-weight: 300; color: var(--white); margin-bottom: 8px; }
+        .recognition-source { font-size: 14px; color: var(--gray-500); font-weight: 300; }
+        
+        /* Services */
+        .services { padding: 160px 0; background: var(--gray-50); }
+        .services-container { max-width: 1600px; margin: 0 auto; padding: 0 80px; }
+        .services-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 80px; margin-top: 80px; }
+        .service { display: grid; grid-template-columns: auto 1fr; gap: 32px; }
+        .service-icon { width: 48px; height: 48px; background: var(--gray-100); display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 600; color: var(--primary); }
+        .service-content h3 { font-size: 20px; font-weight: 500; color: var(--dark); margin-bottom: 12px; }
+        .service-content p { font-size: 15px; font-weight: 300; line-height: 1.6; color: var(--gray-600); margin-bottom: 16px; }
+        .service-outcome { font-size: 14px; font-weight: 500; color: var(--secondary); }
+        
+        /* Industries */
+        .industries { padding: 160px 0; background: var(--white); }
+        .industries-container { max-width: 1600px; margin: 0 auto; padding: 0 80px; }
+        .industries-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 64px; margin-top: 80px; }
+        .industry { padding: 32px; background: var(--gray-50); transition: all 0.3s ease; }
+        .industry:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06); }
+        .industry h4 { font-size: 18px; font-weight: 500; color: var(--dark); margin-bottom: 12px; }
+        .industry p { font-size: 14px; font-weight: 300; line-height: 1.6; color: var(--gray-600); }
+        
+        /* Contact */
+        .contact { padding: 160px 0; background: var(--gray-50); }
+        .contact-container { max-width: 1000px; margin: 0 auto; padding: 0 80px; text-align: center; }
+        .contact h2 { font-size: 40px; font-weight: 200; line-height: 1.2; color: var(--dark); margin-bottom: 32px; }
+        .contact-description { font-size: 18px; font-weight: 300; line-height: 1.6; color: var(--gray-600); max-width: 720px; margin: 0 auto 48px; }
+        .contact-cta { display: inline-block; font-size: 15px; font-weight: 500; color: var(--dark); text-decoration: none; padding: 18px 40px; border: 2px solid var(--dark); border-radius: 2px; transition: all 0.2s ease; }
+        .contact-cta:hover { background: var(--dark); color: var(--white); }
+        
+        /* Footer */
+        .footer { padding: 80px 0 40px; background: var(--dark); color: var(--gray-400); }
+        .footer-container { max-width: 1600px; margin: 0 auto; padding: 0 80px; }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 80px; margin-bottom: 80px; padding-bottom: 80px; border-bottom: 1px solid var(--gray-800); }
+        .footer-brand h3 { font-size: 20px; font-weight: 500; color: var(--white); margin-bottom: 16px; }
+        .footer-brand p { font-size: 14px; font-weight: 300; line-height: 1.6; color: var(--gray-500); max-width: 360px; }
+        .footer-column h4 { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray-500); margin-bottom: 24px; }
+        .footer-column a { display: block; font-size: 14px; font-weight: 300; color: var(--gray-400); text-decoration: none; margin-bottom: 12px; transition: color 0.2s ease; }
+        .footer-column a:hover { color: var(--white); }
+        .footer-bottom { display: flex; justify-content: space-between; align-items: center; }
+        .footer-copyright { font-size: 13px; color: var(--gray-600); }
+        .footer-legal { display: flex; gap: 32px; }
+        .footer-legal a { font-size: 13px; color: var(--gray-600); text-decoration: none; transition: color 0.2s ease; }
+        .footer-legal a:hover { color: var(--gray-400); }
+        
+        /* Loader & Progress */
+        .scroll-progress { position: fixed; top: 0; left: 0; height: 2px; background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%); z-index: 1001; transition: width 0.1s linear; }
+        .loader { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--white); display: flex; align-items: center; justify-content: center; z-index: 9999; transition: opacity 0.6s ease, visibility 0.6s ease; }
+        .loader.hidden { opacity: 0; visibility: hidden; }
+        .loader-text { font-size: 48px; font-weight: 200; color: var(--primary); letter-spacing: -0.02em; }
+        
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .nav-container, .hero-container, .philosophy-container, .model-container, .services-container, .industries-container, .contact-container, .delivered-container, .recognition-container, .footer-container { padding: 0 40px; }
+            .model-grid, .services-grid, .industries-grid, .delivered-grid, .recognition-grid { grid-template-columns: 1fr; gap: 48px; }
+            .footer-grid { grid-template-columns: 1fr; gap: 48px; }
+        }
+        @media (max-width: 768px) {
+            .nav-menu { display: none; }
+            .hero h1 { font-size: 36px; }
+            .hero-description { font-size: 18px; }
+            .stats-grid { flex-direction: column; gap: 16px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loader -->
+    <div class="loader" id="loader">
+        <div class="loader-text">M</div>
+    </div>
+    
+    <!-- Scroll Progress -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+    
+    <!-- Navigation -->
+    <nav class="nav" id="navigation">
+        <div class="nav-container">
+            <a href="#" class="logo">mobiz</a>
+            
+            <ul class="nav-menu">
+                <li><a href="#model">Our Model</a></li>
+                <li><a href="#services">Execution</a></li>
+                <li><a href="#delivered">Delivered Value</a></li>
+                <li><a href="#industries">Industries</a></li>
+            </ul>
+            
+            <a href="#contact" class="nav-contact">
+                <span>Start</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <!-- NEW, STRATEGIC COPY -->
+                <h1>Strategy is speculation. <strong>Execution is truth.</strong></h1>
+                <p class="hero-description">
+                    We are the execution partner for F500 technology leaders. We don't just advise. We architect, build, and deploy the systems that define your future.
+                </p>
+                <a href="#contact" class="hero-cta">
+                    <span>Start the Conversation</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats -->
+    <section class="stats">
+        <div class="stats-container">
+            <div class="stats-label">Currently Executing</div>
+            <div class="stats-grid">
+                <div class="stat-item">Cloud Transformation</div>
+                <div class="stat-item">AI/ML Platforms</div>
+                <div class="stat-item">Digital Product Engineering</div>
+                <div class="stat-item">Core System Modernization</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Accountability Gap -->
+    <section class="philosophy" id="accountability-gap">
+        <div class="philosophy-container">
+            <!-- NEW, USER-APPROVED H2 -->
+            <h2>The Accountability Gap</h2>
+            <!-- NEW, USER-APPROVED P -->
+            <p class="philosophy-text">
+                Traditional consulting is broken. Strategy firms deliver PowerPoints, then leave. System integrators deliver billable hours, but not the outcome. This creates an accountability gap where transformation fails. <strong>We close that gap.</strong>
+            </p>
+        </div>
+    </section>
+
+    <!-- Delivery Model -->
+    <section class="model" id="model">
+        <div class="model-container">
+            <div class="section-header">
+                <!-- NEW, STRATEGIC COPY -->
+                <div class="section-label">The Mobiz Model</div>
+                <h2 class="section-title">One team. One outcome.</h2>
+                <p class="section-description">
+                    We collapse the timeline—and risk—of transformation by owning the entire process. No handoffs. No excuses. Just execution.
+                </p>
+            </div>
+            
+            <div class="model-grid">
+                <div class="model-item">
+                    <div class="model-number">01</div>
+                    <h3 class="model-title">Clarity & Architecture</h3>
+                    <p class="model-description">
+                        We define the first-principles architecture and production roadmap. Technology-agnostic, built for your reality.
+                    </p>
+                </div>
+                
+                <div class="model-item">
+                    <div class="model-number">02</div>
+                    <h3 class="model-title">Velocity & Execution</h3>
+                    <p class="model-description">
+                        The team that designed it, builds it. We write the code, migrate the data, and integrate the systems.
+                    </p>
+                </div>
+                
+                <div class="model-item">
+                    <div class="model-number">03</div>
+                    <h3 class="model-title">Certainty & Deployment</h3>
+                    <p class="model-description">
+                        We own the "last mile" that others ignore. We're not done until you are live, stable, and scaled.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Delivered -->
+    <section class="delivered" id="delivered">
+        <div class="delivered-container">
+            <div class="delivered-header">
+                <span class="delivered-label">Delivered Value</span>
+                <h2 class="delivered-title">Proof, not promises.</h2>
+            </div>
+            
+            <div class="delivered-grid">
+                <div class="delivery-story">
+                    <div class="delivery-client">Global Financial Services</div>
+                    <div class="delivery-metric">
+                        <span class="metric-highlight">2,000+</span>
+                        <span class="metric-context">apps migrated</span>
+                    </div>
+                    <p class="delivery-description">
+                        Zero-downtime cloud transformation. $47M in savings. Designed, built, and deployed by one team.
+                    </p>
+                </div>
+                
+                <div class="delivery-story">
+                    <div class="delivery-client">Sanofi (Featured by Microsoft)</div>
+                    <div class="delivery-metric">
+                        <span class="metric-highlight">6</span>
+                        <span class="metric-context">months: concept to production</span>
+                    </div>
+                    <p class="delivery-description">
+                        AI platform for R&D, featured by Microsoft for its impact. Built and scaled by our team.
+                        <br>
+                        <a href="#" class="delivery-video-link" style="font-weight: 500; color: var(--primary); text-decoration: none; margin-top: 12px; display: inline-block;">
+                            Watch the Microsoft Case Study →
+                        </a>
+                    </p>
+                </div>
+                
+                <div class="delivery-story">
+                    <div class="delivery-client">Global Manufacturer</div>
+                    <div class="delivery-metric">
+                        <span class="metric-highlight">140</span>
+                        <span class="metric-context">facilities connected</span>
+                    </div>
+                    <p class="delivery-description">
+                        Smart factory platform, built and deployed globally. 87% gain in production efficiency.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recognition -->
+    <section class="recognition">
+        <div class="recognition-container">
+            <div class="recognition-grid">
+                <div class="recognition-item">
+                    <div class="recognition-label">Clients</div>
+                    <div class="recognition-title">30+ Fortune 500</div>
+                    <div class="recognition-source">Execution Partners</div>
+                </div>
+                <div class="recognition-item">
+                    <div class="recognition-label">Value</div>
+                    <div class="recognition-title">$2B+</div>
+                    <div class="recognition-source">Delivered & Validated</div>
+                </div>
+                <div class="recognition-item">
+                    <div class="recognition-label">Accountability</div>
+                    <div class="recognition-title">100%</div>
+                    <div class="recognition-source">Production Deployments</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section class="services" id="services">
+        <div class="services-container">
+            <div class="section-header">
+                <div class="section-label">Full-Stack Execution</div>
+                <h2 class="section-title">From the C-Suite to the Codebase</h2>
+                <p class="section-description">
+                    We are architects and engineers. We provide deep, first-principles expertise across the four pillars of enterprise transformation.
+                </p>
+            </div>
+            
+            <div class="services-grid">
+                <div class="service">
+                    <div class="service-icon">01</div>
+                    <div class="service-content">
+                        <h3>Cloud Transformation</h3>
+                        <p>Complete, zero-downtime migrations. Multi-cloud architecture. Legacy modernization. Executed and operational.</p>
+                        <div class="service-outcome">→ Outcome: Scale & Efficiency</div>
+                    </div>
+                </div>
+                
+                <div class="service">
+                    <div class="service-icon">02</div>
+                    <div class="service-content">
+                        <h3>AI & Data Platforms</h3>
+                        <p>Production-ready AI. Data pipelines that scale. We build the "AI factory" that delivers business value, not science projects.</p>
+                        <div class="service-outcome">→ Outcome: Intelligence & Automation</div>
+                    </div>
+                </div>
+                
+                <div class="service">
+                    <div class="service-icon">03</div>
+                    <div class="service-content">
+                        <h3>Digital Product Engineering</h3>
+                        <p>Enterprise-grade digital products, APIs, and platforms. Engineered for 100M+ users. Built for velocity and scale.</p>
+                        <div class="service-outcome">→ Outcome: Velocity & Growth</div>
+                    </div>
+                </div>
+                
+                <div class="service">
+                    <div class="service-icon">04</div>
+                    <div class="service-content">
+                        <h3>Core System Modernization</h3>
+                        <p>ERP, CRM, and supply chain modernization. We untangle the monolith and replace risk with reliable, modern systems.</p>
+                        <div class="service-outcome">→ Outcome: Resilience & Stability</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Industries -->
+    <section class="industries" id="industries">
+        <div class="industries-container">
+            <div class="section-header">
+                <div class="section-label">Industries We Execute In</div>
+                <h2 class="section-title">We build for complexity.</h2>
+                <p class="section-description">
+                    We deliver execution for leaders in the world's most complex, regulated, and mission-critical industries.
+                </p>
+            </div>
+            
+            <div class="industries-grid">
+                <div class="industry">
+                    <h4>Financial Services</h4>
+                    <p>Core banking platforms. Trading systems. Risk engines.</p>
+                </div>
+                <div class="industry">
+                    <h4>Healthcare & Life Sciences</h4>
+                    <p>AI diagnostics. Patient platforms. Clinical systems.</p>
+                </div>
+                <div class="industry">
+                    <h4>Manufacturing</h4>
+                    <p>Smart factories. Digital supply chains. Predictive maintenance.</p>
+                </div>
+                <div class="industry">
+                    <h4>Energy & Utilities</h4>
+                    <p>Grid modernization. Renewable platforms. Carbon tracking.</p>
+                </div>
+                <div class="industry">
+                    <h4>Retail & CPG</h4>
+                    <p>Omnichannel platforms. Inventory systems. Personalization engines.</p>
+                </div>
+                <div class="industry">
+                    <h4>Public Sector</h4>
+                    <p>Legacy modernization. Citizen services. Security frameworks.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="contact" id="contact">
+        <div class="contact-container">
+            <!-- NEW, STRATEGIC COPY -->
+            <h2>An outcome, not an opinion.</h2>
+            <p class="contact-description">
+                Stop talking about transformation. Start executing it. We're ready to build. Let's start the conversation.
+            </p>
+            <a href="mailto:strategy@mobizinc.com" class="contact-cta">
+                <span>Start the Conversation</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>Mobiz</h3>
+                    <!-- NEW, STRATEGIC COPY -->
+                    <p>Strategy is speculation. Execution is truth. We are the execution partner for technology leaders.</p>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>What We Execute</h4>
+                    <a href="#services">Cloud Transformation</a>
+                    <a href="#services">AI & Data Platforms</a>
+                    <a href="#services">Digital Product Engineering</a>
+                    <a href="#services">Core System Modernization</a>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>About Mobiz</h4>
+                    <a href="#model">Our Model</a>
+                    <a href="#delivered">Delivered Value</a>
+                    <a href="#">Thought Leadership</a>
+                    <a href="#">Careers</a>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Industries</h4>
+                    <a href="#industries">Financial Services</a>
+                    <a href="#industries">Healthcare</a>
+                    <a href="#industries">Manufacturing</a>
+                    <a href="#industries">Energy & Utilities</a>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    © 2025 Mobiz. Execution Partner.
+                </div>
+                <div class="footer-legal">
+                    <a href="#">Privacy</a>
+                    <a href="#">Terms</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth page load
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loader').classList.add('hidden');
+                document.body.classList.add('loaded');
+            }, 800);
+        });
+        
+        // Scroll progress
+        window.addEventListener('scroll', () => {
+            const scrollProgress = document.getElementById('scrollProgress');
+            const pos = document.documentElement.scrollTop;
+            const calcHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrollValue = Math.round((pos * 100) / calcHeight);
+            scrollProgress.style.width = scrollValue + '%';
+        });
+        
+        // Navigation scroll effect
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navigation');
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+        
+        // Smooth anchor scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offset = 80;
+                    const targetPosition = target.offsetTop - offset;
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Number animation
+        const animateValue = (element, start, end, duration) => {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                const current = Math.floor(progress * (end - start) + start);
+                
+                if (element.dataset.type === 'currency') {
+                    element.textContent = '$' + current + 'M';
+                } else if (element.dataset.type === 'billions') {
+                    // Corrected logic for Billions
+                    element.textContent = '$' + (current / 1000).toFixed(1) + 'B+';
+                } else if (element.dataset.type === 'percentage') {
+                    element.textContent = current + '%';
+                } else if (element.dataset.type === 'millions') {
+                    element.textContent = current + 'M';
+                } else if (element.dataset.type === 'count') {
+                    element.textContent = current.toLocaleString() + '+';
+                } else {
+                    element.textContent = current;
+                }
+                
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        };
+        
+        // Observe metrics
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !entry.target.animated) {
+                    entry.target.animated = true;
+                    const text = entry.target.textContent;
+                    let value, type;
+                    
+                    if (text.includes('$') && text.includes('B')) {
+                        type = 'billions';
+                        // Corrected parsing for Billions
+                        value = parseFloat(text.replace(/[^0-9.]/g, '')) * 1000;
+                    } else if (text.includes('$')) {
+                        type = 'currency';
+                        value = parseInt(text.replace(/[^0-9]/g, ''));
+                    } else if (text.includes('%')) {
+                        type = 'percentage';
+                        value = parseInt(text.replace(/[^0-9]/g, ''));
+                    } else if (text.includes('M')) {
+                        type = 'millions';
+                        value = parseInt(text.replace(/[^0-9]/g, ''));
+                    } else if (text.includes('+')) {
+                        type = 'count';
+                        value = parseInt(text.replace(/[^0-9]/g, ''));
+                    } else {
+                         // Fallback for simple numbers like '6'
+                        value = parseInt(text.replace(/[^0-9]/g, ''));
+                        if (isNaN(value)) value = null;
+                    }
+                    
+                    if (value) {
+                        if (!type) type = 'default';
+                        entry.target.dataset.type = type;
+                        animateValue(entry.target, 0, value, 2000);
+                    }
+                }
+            });
+        }, { threshold: 0.5 });
+        
+        document.querySelectorAll('.metric-value, .metric-highlight').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
+
