@@ -2,7 +2,6 @@ import type {Metadata} from 'next'
 import {Libre_Franklin, Metrophobic} from 'next/font/google'
 
 import {OrganizationStructuredData} from '@/components/seo/OrganizationStructuredData'
-import {ConsentBanner} from '@/components/ui/ConsentBanner'
 import {GA4WithConsent} from '@/components/ui/GA4WithConsent'
 import {Footer} from '@/components/layout/Footer'
 import {Navigation} from '@/components/layout/Navigation'

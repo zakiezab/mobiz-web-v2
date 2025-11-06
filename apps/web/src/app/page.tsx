@@ -5,7 +5,6 @@ import { AccountabilityGap } from "@/components/sections/AccountabilityGap";
 import { ContactCTA } from "@/components/sections/ContactCTA";
 import { DeliveredValue } from "@/components/sections/DeliveredValue";
 import { Hero } from "@/components/sections/Hero";
-import { IndustriesGrid } from "@/components/sections/IndustriesGrid";
 import { IndustriesShowcase } from "@/components/sections/IndustriesShowcase";
 import { ModelGrid } from "@/components/sections/ModelGrid";
 import { PartnersBar } from "@/components/sections/PartnersBar";

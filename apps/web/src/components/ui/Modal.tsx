@@ -18,8 +18,8 @@ export function Modal({ isOpen, onClose, children }: ModalProps) {
     if (isOpen) {
       setShouldRender(true);
       // Trigger animation after a tiny delay to ensure DOM is ready
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
+      window.requestAnimationFrame(() => {
+        window.requestAnimationFrame(() => {
           setIsAnimating(true);
         });
       });

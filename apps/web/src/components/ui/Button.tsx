@@ -38,7 +38,7 @@ export function Button({
       const element = document.querySelector(href)
       if (element) {
         // Use requestAnimationFrame to ensure accurate position calculation
-        requestAnimationFrame(() => {
+        window.requestAnimationFrame(() => {
           // Get the element's position relative to the document
           const elementRect = element.getBoundingClientRect()
           const elementTop = elementRect.top + window.pageYOffset

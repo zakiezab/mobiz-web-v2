@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { Button } from "../ui/Button";
 import { AnimatedThemeToggler } from "@/registry/magicui/animated-theme-toggler";
@@ -43,7 +42,7 @@ export function Navigation() {
           const element = document.querySelector(`#${hash}`);
           if (element) {
             // Use requestAnimationFrame to ensure accurate position calculation
-            requestAnimationFrame(() => {
+            window.requestAnimationFrame(() => {
               // Get the element's position relative to the document
               const elementRect = element.getBoundingClientRect();
               const elementTop = elementRect.top + window.pageYOffset;

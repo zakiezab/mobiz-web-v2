@@ -53,6 +53,11 @@ export default [
         expect: "readonly",
         React: "readonly",
         HTMLDivElement: "readonly",
+        HTMLButtonElement: "readonly",
+        requestAnimationFrame: "readonly",
+        WheelEvent: "readonly",
+        NodeJS: "readonly",
+        JSX: "readonly",
       },
     },
     plugins: {

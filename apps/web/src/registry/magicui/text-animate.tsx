@@ -1,13 +1,13 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import type { ReactNode } from "react"
 import { cn } from "@/lib/utils"
 
 interface TextAnimateProps {
   children: ReactNode
   animation?: "blurIn" | "fadeIn" | "slideUp" | "slideDown"
-  as?: keyof JSX.IntrinsicElements
+  as?: keyof React.JSX.IntrinsicElements
   className?: string
   delay?: number
   duration?: number
@@ -37,8 +37,6 @@ export function TextAnimate({
         const rect = element.getBoundingClientRect()
         const windowHeight = window.innerHeight
         const elementTop = rect.top
-        const elementBottom = rect.bottom
-        const elementHeight = rect.height
         
         // Calculate scroll-based blur that's continuously controlled by scroll position
         // Start blur when element is 300px below viewport
@@ -67,7 +65,7 @@ export function TextAnimate({
       }
 
       // Initial calculation - use requestAnimationFrame to ensure DOM is ready
-      requestAnimationFrame(() => {
+      window.requestAnimationFrame(() => {
         handleScroll()
       })
       
@@ -81,8 +79,9 @@ export function TextAnimate({
     } else {
       // Original IntersectionObserver approach for non-scroll-based animations
       const observer = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) {
+        (entries) => {
+          const entry = entries[0]
+          if (entry?.isIntersecting) {
             setTimeout(() => {
               setScrollProgress(1)
             }, delay * 1000)
@@ -156,9 +155,10 @@ export function TextAnimate({
     }
   }
 
+  const ComponentWithRef = Component as React.ElementType<{ ref?: React.Ref<HTMLElement>; className?: string; style?: React.CSSProperties; children?: ReactNode }>
   return (
-    <Component
-      ref={ref as any}
+    <ComponentWithRef
+      ref={ref}
       className={cn(
         "will-change-[opacity,filter,transform]",
         getAnimationClasses(),
@@ -172,7 +172,7 @@ export function TextAnimate({
       }}
     >
       {children}
-    </Component>
+    </ComponentWithRef>
   )
 }
 

@@ -62,7 +62,7 @@ function MetricDisplay({ value, label }: HeroMetric) {
   )
 }
 
-export function Hero({ label, title, highlight, description, cta, metrics }: HeroProps) {
+export function Hero({ label: _label, title, highlight, description, cta, metrics }: HeroProps) {
   const [scrollProgress, setScrollProgress] = useState(0)
 
   useEffect(() => {

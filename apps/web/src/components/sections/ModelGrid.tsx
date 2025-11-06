@@ -41,10 +41,9 @@ export function ModelGrid({
     checkScrollable()
     window.addEventListener('resize', checkScrollable)
 
-    let isScrolling = false
-    let scrollTimeout: NodeJS.Timeout
+    let scrollTimeout: ReturnType<typeof setTimeout>
 
-    const handleWheel = (e: WheelEvent) => {
+    const handleWheel = (e: globalThis.WheelEvent) => {
       if (!isScrollable) return
 
       // Check if the scroll container (items) is in view
@@ -70,20 +69,18 @@ export function ModelGrid({
       if (e.deltaY > 0 && !isAtEnd) {
         e.preventDefault()
         scrollContainer.scrollLeft += e.deltaY
-        isScrolling = true
         clearTimeout(scrollTimeout)
         scrollTimeout = setTimeout(() => {
-          isScrolling = false
+          // Allow normal scroll after a brief pause
         }, 150)
       }
       // If scrolling up and not at start, scroll horizontally
       else if (e.deltaY < 0 && !isAtStart) {
         e.preventDefault()
         scrollContainer.scrollLeft += e.deltaY
-        isScrolling = true
         clearTimeout(scrollTimeout)
         scrollTimeout = setTimeout(() => {
-          isScrolling = false
+          // Allow normal scroll after a brief pause
         }, 150)
       }
       // If at end and scrolling down, allow normal scroll

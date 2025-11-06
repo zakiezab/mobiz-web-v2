@@ -1,4 +1,3 @@
-import Image from "next/image"
 import { TextAnimate } from "@/registry/magicui/text-animate"
 
 interface AccountabilityGapProps {
