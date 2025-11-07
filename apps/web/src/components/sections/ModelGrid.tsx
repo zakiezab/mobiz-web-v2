@@ -115,7 +115,7 @@ export function ModelGrid({
         className="flex flex-col md:flex-row gap-8 md:gap-16 overflow-x-auto scrollbar-hide pl-4 md:pl-[33vw] pr-4 md:pr-40"
       >
           {items.map((item) => (
-            <div key={item.title} className="group flex flex-col gap-4 md:gap-8 p-6 md:p-8 bg-gray-50 dark:bg-secondary-800/50 hover:bg-gray-100 dark:hover:bg-secondary-800 transition-all duration-300 rounded-3xl flex-shrink-0 w-full md:w-[500px]">
+            <div key={item.title} className="group flex flex-col gap-4 md:gap-8 p-6 md:p-8 bg-gray-50 dark:bg-secondary-800/50 hover:bg-primary-100 dark:hover:bg-secondary-800 transition-all duration-300 rounded-3xl flex-shrink-0 w-full md:w-[500px]">
               <div className="text-xl tracking-wider text-gray-500 dark:text-secondary-200 mb-5">
                 {item.number}
               </div>

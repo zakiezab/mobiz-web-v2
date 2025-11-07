@@ -4,7 +4,7 @@ import Link from 'next/link'
 export function Footer() {
   return (
     <footer className="relative z-10 pt-20 pb-10 bg-gray-50 dark:bg-dark text-gray-600 dark:text-gray-400">
-      <div className="w-full max-w-container mx-auto px-16 2xl:px-6">
+      <div className="mx-auto w-full max-w-container px-4 md:px-16 2xl:px-6">
         {/* Footer Grid */}
         <div className="grid grid-cols-1 md:grid-cols-[2fr_1fr_1fr_1fr] gap-10 mb-10 pb-10 border-b border-gray-200 dark:border-secondary-300/50">
           {/* Brand Column */}
@@ -148,7 +148,7 @@ export function Footer() {
               <Image src="images/icons/Youtube.svg" alt="Youtube" width={20} height={20} />
             </Link>
             <Link href="#" className="transition-colors duration-200 hover:text-primary-300">
-              <Image src="images/icons/LinkedIn.svg" alt="LinkedIn" width={20} height={20} />
+              <Image src="images/icons/Linkedin.svg" alt="LinkedIn" width={20} height={20} />
             </Link>
           </div>
         </div>

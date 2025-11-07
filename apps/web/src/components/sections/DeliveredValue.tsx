@@ -48,7 +48,7 @@ function StoryCard({ story }: { story: DeliveredStory }) {
   const counter = useCountUp({ end, type, suffix });
 
   return (
-    <div className="flex flex-col gap-8 md:gap-12 p-8 bg-gray-50 dark:bg-secondary-600/60 transition-all duration-300 rounded-3xl hover:-translate-y-2 hover:shadow-[0_12px_40px_rgba(0,0,0,0.08)]">
+    <div className="flex flex-col gap-8 md:gap-12 p-8 bg-gray-50 dark:bg-secondary-800/40 hover:bg-primary-100 dark:hover:bg-secondary-800 transition-all duration-300 rounded-3xl hover:-translate-y-2 hover:shadow-[0_12px_40px_rgba(0,0,0,0.08)]">
       <div>
         <div className="text-base uppercase tracking-wider text-gray-500 dark:text-secondary-300 mb-5">
           {story.client}

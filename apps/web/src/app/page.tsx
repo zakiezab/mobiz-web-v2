@@ -29,10 +29,10 @@ const FALLBACK_DATA = {
     { value: "120+", label: "Handoffs" },
   ],
   statsItems: [
-    { label: "Cloud Transformation", image: "/images/icons/ico-doc.png" },
+    { label: "Cloud Transformation", image: "/images/icons/ico-cloud2.png" },
     { label: "AI/ML Platforms", image: "/images/icons/ico-ai.png" },
     { label: "Digital Product Engineering", image: "/images/icons/ico-edit.png" },
-    { label: "Core System Modernization", image: "/images/icons/ico-folder.png" },
+    { label: "Core System Modernization", image: "/images/icons/ico-system2.png" },
   ],
   accountabilityGapTitle: "The Accountability Gap",
   accountabilityGapBody:
