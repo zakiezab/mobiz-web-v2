@@ -54,7 +54,7 @@ export function StatsBar({ label, items }: StatsBarProps) {
 
   return (
     <section ref={sectionRef} className="bg-white dark:bg-dark py-16">
-      <div className="flex justify-center mx-auto w-full max-w-container px-20 text-center">
+      <div className="flex items-center justify-center mx-auto w-full max-w-container px-4 md:px-24 text-center">
         <div 
           className="group relative w-fit border border-gray-200 dark:border-secondary-200/20 rounded-2xl p-4 bg-gradient-to-tl from-gray-50 dark:from-secondary-300/10 to-gray-100 dark:to-secondary-600/10 overflow-hidden"
           style={{ transform: `scale(${scrollProgress})` }}
@@ -63,11 +63,11 @@ export function StatsBar({ label, items }: StatsBarProps) {
           <div className="absolute inset-0 bg-gradient-to-tl from-gray-200 dark:from-secondary-600 to-gray-300 dark:to-secondary-800 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl" />
           
           {/* Content */}
-          <div className="relative z-10">
+          <div className="relative z-10 ">
             <div className="text-xs font-semibold uppercase tracking-widest text-gray-600 dark:text-secondary-200 mb-6">
               {label}
             </div>
-            <div className="flex justify-center items-center gap-12 flex-wrap">
+            <div className="flex flex-col md:flex-row justify-center items-center gap-12 flex-wrap">
               {normalizedItems.map((item, index) => (
                 <div key={item.label || index} className="flex flex-col items-center gap-3">
                   {item.image && (

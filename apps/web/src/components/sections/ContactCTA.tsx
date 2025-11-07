@@ -18,8 +18,8 @@ export function ContactCTA({ title, description, ctaLabel }: ContactCTAProps) {
   return (
     <>
       <section className="bg-[url('/images/background02.png')] dark:bg-[url('/images/background.png')] bg-cover bg-bottom-left py-40" id="contact">
-        <div className="w-full max-w-container mx-auto px-16 2xl:px-6 relative flex items-center justify-between">
-          <h2 className="!font-metrophobic font-normal text-5xl md:text-7xl leading-tight tracking-tighter text-gray-900 dark:text-secondary-100 mb-6">
+        <div className="w-full max-w-container mx-auto px-4 md:px-16 2xl:px-6 relative flex flex-col md:flex-row items-center justify-between">
+          <h2 className="!font-metrophobic font-normal text-5xl md:text-7xl leading-tight tracking-tighter text-gray-900 dark:text-secondary-100 mb-6 w-full md:w-auto">
             {title}
           </h2>
           <div>

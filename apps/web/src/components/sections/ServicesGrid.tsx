@@ -28,7 +28,7 @@ export function ServicesGrid({
 }: ServicesGridProps) {
   return (
     <section id={id} className="bg-white dark:bg-dark py-40">
-      <div className="mx-auto w-full max-w-container px-16 2xl:px-6">
+      <div className="mx-auto w-full max-w-container px-4 md:px-16 2xl:px-6">
         <div className="flex justify-end">
           <div className="max-w-900 mb-20">
             <SectionHeader
@@ -39,21 +39,21 @@ export function ServicesGrid({
             />
           </div>
         </div>
-        <div className="grid gap-20 md:grid-cols-2">
+        <div className="grid gap-8 md:gap-20 md:grid-cols-2">
           {services.map((service) => {
             const content = (
               <>
-                <div className="w-20 h-20 bg-primary-300/20 border border-primary-300 rounded-3xl flex items-center justify-center text-2xl !font-metrophobic text-primary dark:text-primary-100">
+                <div className="w-12 h-12 md:w-20 md:h-20 bg-primary-300/20 border border-primary-300 rounded-2xl md:rounded-3xl flex items-center justify-center text-xl md:text-2xl !font-metrophobic text-primary dark:text-primary-100">
                   {service.number}
                 </div>
                 <div className="space-y-3">
-                  <h3 className="!font-metrophobic text-gray-900 dark:text-secondary-100 text-2xl md:text-4xl leading-tight tracking-tighter mb-6">
+                  <h3 className="!font-metrophobic text-gray-900 dark:text-secondary-100 text-3xl md:text-4xl leading-tight tracking-tighter mb-6">
                     {service.title}
                   </h3>
-                  <p className="text-xl font-light leading-relaxed text-gray-700 dark:text-secondary-100 max-w-prose">
+                  <p className="text-base md:text-xl font-light leading-relaxed text-gray-700 dark:text-secondary-100 max-w-prose">
                     {service.description}
                   </p>
-                  <p className="flex items-center gap-2 mt-3 text-lg text-primary">
+                  <p className="flex items-center gap-2 mt-3 text-base md:text-xl text-primary">
                     {service.outcome}
                     <TrendingUp className="w-5 h-5" />
                   </p>

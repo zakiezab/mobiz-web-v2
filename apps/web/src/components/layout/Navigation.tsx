@@ -78,7 +78,7 @@ export function Navigation() {
           }`}
       >
         <nav
-          className={`w-full max-w-container mx-auto flex items-center px-16 2xl:px-6 justify-between text-sm text-dark transition-all duration-300 ${scrolled ? "py-4" : "py-7"
+          className={`w-full max-w-container mx-auto flex items-center px-4 md:px-16 2xl:px-6 justify-between text-sm text-dark transition-all duration-300 ${scrolled ? "py-4" : "py-7"
             }`}
         >
           <div className="z-50">
@@ -125,19 +125,19 @@ export function Navigation() {
               onClick={() => setMenuOpen((o) => !o)}
               className="relative z-50 h-14 w-14 items-center justify-center rounded-lg transition-all duration-700 bg-gray-200/50 dark:bg-secondary/10 hover:bg-gray-300/50 dark:hover:bg-secondary-100/10 px-4"
             >
-              <span className={`block h-0.5 w-6 bg-gray-700 dark:bg-secondary-100 transition-transform duration-500 ${menuOpen ? 'translate-y-[5px] rotate-45' : ''}`} />
-              <span className={`block my-1 h-0.5 w-6 bg-gray-700 dark:bg-secondary-100 transition-opacity duration-300 ${menuOpen ? 'opacity-0' : 'opacity-100'}`} />
-              <span className={`block h-0.5 w-6 bg-gray-700 dark:bg-secondary-100 transition-transform duration-500 ${menuOpen ? '-translate-y-[7px] -rotate-45' : ''}`} />
+              <span className={`block h-0.5 w-6 bg-secondary-800 dark:bg-secondary-100 transition-transform duration-500 ${menuOpen ? 'translate-y-[5px] rotate-45' : ''}`} />
+              <span className={`block my-1 h-0.5 w-6 bg-secondary-800 dark:bg-secondary-100 transition-opacity duration-300 ${menuOpen ? 'opacity-0' : 'opacity-100'}`} />
+              <span className={`block h-0.5 w-6 bg-secondary-800 dark:bg-secondary-100 transition-transform duration-500 ${menuOpen ? '-translate-y-[7px] -rotate-45' : ''}`} />
             </button>
           </div>
         </nav>
       </header>
       {/* Fullscreen overlay menu - positioned outside header so it covers full viewport */}
       <div
-        className={`fixed inset-0 z-40 bg-white/95 dark:bg-dark/95 w-screen h-screen transition-opacity duration-500 ${menuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
+        className={`fixed inset-0 z-40 bg-secondary-100/95 dark:bg-dark/95 w-screen h-screen transition-opacity duration-500 ${menuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
       >
-        <div className="flex h-full w-full px-24 items-center justify-end">
-          <ul className="flex flex-col gap-10 text-5xl text-right">
+        <div className="flex h-full w-full px-4 md:px-24 items-center justify-end">
+          <ul className="flex flex-col gap-6 md:gap-10 text-3xl md:text-5xl text-right">
             {LINKS.map((link) => (
               <li key={link.href}>
                 <Link

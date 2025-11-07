@@ -85,17 +85,17 @@ export function Hero({ label: _label, title, highlight, description, cta, metric
         className="absolute inset-0 bg-gradient-to-b from-gray-200/50 via-gray-300/50 to-gray-400/50 dark:from-secondary dark:via-dark dark:to-bgdark pointer-events-none"
         style={{ opacity: scrollProgress }}
       />
-      <div className="w-full max-w-container px-16 2xl:px-6 relative z-10 flex justify-between pb-8">
+      <div className="w-full max-w-container px-4 md:px-16 2xl:px-6 relative z-10 flex justify-between pb-28 md:pb-8">
         <div className="max-w-900">
           {/* {label && (
             <div className="text-xs font-semibold uppercase tracking-widest text-secondary mb-8">
               {label}
             </div>
           )} */}
-          <h1 className="!font-metrophobic font-normal text-5xl md:text-7xl leading-tight tracking-tighter text-gray-900 dark:text-secondary-100 mb-6">
+          <h1 className="!font-metrophobic font-normal text-4xl md:text-7xl leading-tight tracking-tighter text-gray-900 dark:text-secondary-100 mb-6">
             {title} <strong className="!font-metrophobic text-gray-900 dark:text-secondary-100">{highlight}</strong>
           </h1>
-          <p className="text-[22px] font-light leading-relaxed text-gray-700 dark:text-secondary-100 max-w-prose mb-12">
+          <p className="text-base md:text-2xl font-light leading-relaxed text-gray-700 dark:text-secondary-100 max-w-prose mb-12">
             {description}
           </p>
           <Button href={cta.href} className="flex items-center gap-2 hover:gap-4 shadow-none hover:shadow-[0_12px_32px_rgba(216,36,42,0.2)] transition-all duration-500">

@@ -98,7 +98,7 @@ export function ModelGrid({
 
   return (
     <section ref={sectionRef} id={id} className="py-40">
-      <div className="mx-auto w-full max-w-container px-20">
+      <div className="mx-auto w-full max-w-container px-4 md:px-16 2xl:px-6">
         <div className="flex justify-end">
           <div className="max-w-900 mb-20">
             <SectionHeader
@@ -112,14 +112,14 @@ export function ModelGrid({
       </div>
       <div 
         ref={scrollContainerRef}
-        className="flex gap-16 overflow-x-auto scrollbar-hide pl-[33vw] md:pl-[33vw] pr-20 md:pr-40"
+        className="flex flex-col md:flex-row gap-8 md:gap-16 overflow-x-auto scrollbar-hide pl-4 md:pl-[33vw] pr-4 md:pr-40"
       >
           {items.map((item) => (
-            <div key={item.title} className="group flex flex-col gap-8 p-8 bg-gray-50 dark:bg-secondary-800/50 hover:bg-gray-100 dark:hover:bg-secondary-800 transition-all duration-300 rounded-3xl flex-shrink-0 w-[500px]">
+            <div key={item.title} className="group flex flex-col gap-4 md:gap-8 p-6 md:p-8 bg-gray-50 dark:bg-secondary-800/50 hover:bg-gray-100 dark:hover:bg-secondary-800 transition-all duration-300 rounded-3xl flex-shrink-0 w-full md:w-[500px]">
               <div className="text-xl tracking-wider text-gray-500 dark:text-secondary-200 mb-5">
                 {item.number}
               </div>
-              <h3 className="!font-metrophobic text-gray-900 dark:text-secondary-100 text-5xl md:text-7xl leading-tight tracking-tighter mb-4">
+              <h3 className="!font-metrophobic text-gray-900 dark:text-secondary-100 text-4xl md:text-7xl leading-tight tracking-tighter mb-4">
                 {item.title}
               </h3>
               <p className="text-xl font-light leading-relaxed text-gray-700 dark:text-secondary-100">

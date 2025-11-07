@@ -125,9 +125,9 @@ export function IndustriesShowcase({
     <section
       // ref={sectionRef}
       id={id}
-      className="bg-white dark:bg-dark py-20 px-16 md:py-20 md:px-16"
+      className="bg-white dark:bg-dark py-20"
     >
-      <div className="mx-auto w-full max-w-container">
+      <div className="mx-auto w-full max-w-container px-4 md:px-16 2xl:px-6">
         <div className="flex flex-col gap-12 md:flex-row md:gap-12 justify-start">
           {/* Left Column - Header */}
           <div className="flex md:basis-5/12">
@@ -152,11 +152,11 @@ export function IndustriesShowcase({
               return (
                 <div
                   key={industry.name}
-                  className="bg-gray-50 dark:bg-secondary-800/20 p-6 rounded-3xl flex flex-col gap-4 min-h-[280px] transition-all duration-300 hover:bg-gray-100 dark:hover:bg-secondary-800/70 hover:scale-[1.02] group"
+                  className="bg-secondary-100 dark:bg-secondary-800/20 p-6 rounded-3xl flex flex-col gap-4 min-h-[280px] transition-all duration-300 hover:bg-secondary-200 dark:hover:bg-secondary-800/70 hover:scale-[1.02] group"
                 >
                   {/* Icon */}
                   {Icon && (
-                    <div className="flex-shrink-0">
+                    <div className="w-full flex flex-shrink-0 justify-end">
                       <Icon className="w-12 h-12 text-primary transition-transform duration-300 group-hover:scale-110" />
                     </div>
                   )}
@@ -166,7 +166,7 @@ export function IndustriesShowcase({
                     <h3 className="font-metrophobic text-gray-900 dark:text-white text-3xl tracking-wide">
                       {industry.name}
                     </h3>
-                    <p className="text-gray-600 dark:text-secondary-200 text-lg font-normal leading-relaxed tracking-wide">
+                    <p className="text-gray-600 dark:text-secondary-200 text-base md:text-xl font-light leading-relaxed tracking-wide">
                       {industry.description}
                     </p>
                   </div>

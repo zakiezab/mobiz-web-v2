@@ -48,7 +48,7 @@ function StoryCard({ story }: { story: DeliveredStory }) {
   const counter = useCountUp({ end, type, suffix });
 
   return (
-    <div className="flex flex-col gap-12 p-8 bg-gray-50 dark:bg-secondary-600/60 transition-all duration-300 rounded-3xl hover:-translate-y-2 hover:shadow-[0_12px_40px_rgba(0,0,0,0.08)]">
+    <div className="flex flex-col gap-8 md:gap-12 p-8 bg-gray-50 dark:bg-secondary-600/60 transition-all duration-300 rounded-3xl hover:-translate-y-2 hover:shadow-[0_12px_40px_rgba(0,0,0,0.08)]">
       <div>
         <div className="text-base uppercase tracking-wider text-gray-500 dark:text-secondary-300 mb-5">
           {story.client}
@@ -91,7 +91,7 @@ export function DeliveredValue({
 }: DeliveredValueProps) {
   return (
     <section id={id} className="bg-white dark:bg-dark py-40">
-      <div className="relative mx-auto w-full max-w-container px-16 2xl:px-6 flex flex-col justify-start ">
+      <div className="relative mx-auto w-full max-w-container px-4 md:px-16 2xl:px-6 flex flex-col justify-start ">
         <div className="max-w-900 mb-20">
           <SectionHeader
             label={label}

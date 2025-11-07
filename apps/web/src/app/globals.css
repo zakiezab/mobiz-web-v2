@@ -111,11 +111,11 @@
   }
 
   .section-title {
-    @apply !font-metrophobic text-gray-900 dark:text-secondary-100 text-5xl md:text-7xl leading-tight tracking-tighter mb-6;
+    @apply !font-metrophobic text-gray-900 dark:text-secondary-100 text-4xl md:text-7xl leading-tight tracking-tighter mb-6;
   }
 
   .section-description {
-    @apply text-xl font-light leading-relaxed text-gray-700 dark:text-secondary-100 max-w-prose;
+    @apply text-base md:text-xl font-light leading-relaxed text-gray-700 dark:text-secondary-100 max-w-prose;
   }
 
   .scrollbar-hide {

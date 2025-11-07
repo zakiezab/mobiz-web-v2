@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Button } from "./Button";
 
 interface ContactFormProps {
   onClose?: () => void;
@@ -108,7 +109,7 @@ export function ContactForm({ onClose }: ContactFormProps) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
+    <form onSubmit={handleSubmit} className="space-y-4">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
           <label
@@ -123,9 +124,8 @@ export function ContactForm({ onClose }: ContactFormProps) {
             name="name"
             value={formData.name}
             onChange={handleChange}
-            className={`w-full px-4 py-3 border rounded-sm bg-white dark:bg-dark/50 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-transparent transition-colors ${
-              errors.name ? "border-red-500" : "border-gray-300 dark:border-gray-600"
-            }`}
+            className={`w-full px-4 py-3 border rounded-sm bg-white dark:bg-dark/50 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-transparent transition-colors ${errors.name ? "border-red-500" : "border-gray-300 dark:border-gray-600"
+              }`}
             placeholder="Your name"
           />
           {errors.name && (
@@ -146,9 +146,8 @@ export function ContactForm({ onClose }: ContactFormProps) {
             name="email"
             value={formData.email}
             onChange={handleChange}
-            className={`w-full px-4 py-3 border rounded-sm bg-white dark:bg-dark/50 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-transparent transition-colors ${
-              errors.email ? "border-red-500" : "border-gray-300 dark:border-gray-600"
-            }`}
+            className={`w-full px-4 py-3 border rounded-sm bg-white dark:bg-dark/50 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-transparent transition-colors ${errors.email ? "border-red-500" : "border-gray-300 dark:border-gray-600"
+              }`}
             placeholder="your@email.com"
           />
           {errors.email && (
@@ -188,9 +187,8 @@ export function ContactForm({ onClose }: ContactFormProps) {
           value={formData.message}
           onChange={handleChange}
           rows={6}
-          className={`w-full px-4 py-3 border rounded-sm bg-white dark:bg-dark/50 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-transparent transition-colors resize-vertical ${
-            errors.message ? "border-red-500" : "border-gray-300 dark:border-gray-600"
-          }`}
+          className={`w-full px-4 py-3 border rounded-sm bg-white dark:bg-dark/50 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-transparent transition-colors resize-vertical ${errors.message ? "border-red-500" : "border-gray-300 dark:border-gray-600"
+            }`}
           placeholder="Tell us about your project or challenge..."
         />
         {errors.message && (
@@ -206,24 +204,27 @@ export function ContactForm({ onClose }: ContactFormProps) {
         </div>
       )}
 
-      <div className="flex gap-4">
-        <button
-          type="submit"
-          disabled={isSubmitting}
-          className="flex-1 bg-dark dark:bg-primary text-white px-8 py-3 rounded-sm font-medium transition-all duration-200 hover:bg-gray-800 dark:hover:bg-primary-300 disabled:opacity-50 disabled:cursor-not-allowed"
-        >
-          {isSubmitting ? "Sending..." : "Send Message"}
-        </button>
-
+      <div className="flex w-full justify-end gap-4 flex-col-reverse md:flex-row">
         {onClose && (
-          <button
+          <Button
+            variant="ghost"
             type="button"
             onClick={onClose}
-            className="px-8 py-3 border-2 border-dark dark:border-gray-600 text-dark dark:text-gray-300 rounded-sm font-medium transition-all duration-200 hover:bg-dark dark:hover:bg-gray-700 hover:text-white dark:hover:text-white"
+            // className="px-8 py-3 border-2 border-dark dark:border-gray-600 text-dark dark:text-gray-300 rounded-sm font-medium transition-all duration-200 hover:bg-dark dark:hover:bg-gray-700 hover:text-white dark:hover:text-white"
           >
             Cancel
-          </button>
+          </Button>
         )}
+
+        <Button
+          variant="primary"
+          type="submit"
+          disabled={isSubmitting}
+          className=" disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          {isSubmitting ? "Sending..." : "Send Message"}
+        </Button>
+
       </div>
     </form>
   );

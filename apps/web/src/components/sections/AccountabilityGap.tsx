@@ -8,7 +8,7 @@ interface AccountabilityGapProps {
 export function AccountabilityGap({title, body}: AccountabilityGapProps) {
   return (
     <section className="py-56 min-h-fit relative">
-      <div className="relative mx-auto w-full max-w-container px-16 2xl:px-6 flex flex-col justify-start ">
+      <div className="relative mx-auto w-full max-w-container px-4 md:px-16 2xl:px-6 flex flex-col justify-start ">
         <TextAnimate animation="blurIn" as="h2" className="section-title" scrollBased={true} blurAmount={15}>
           {title}
         </TextAnimate>

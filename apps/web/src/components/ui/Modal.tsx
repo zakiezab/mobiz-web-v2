@@ -63,10 +63,10 @@ export function Modal({ isOpen, onClose, children }: ModalProps) {
         onClick={onClose}
       />
 
-      {/* Modal Container - slides up from bottom to center */}
-      <div className="fixed inset-0 flex items-center justify-center p-4 pointer-events-none">
+      {/* Modal Container - fullscreen on mobile, centered modal on desktop */}
+      <div className="fixed inset-0 flex items-end md:items-center md:justify-center md:p-4 pointer-events-none">
         <div
-          className={`relative w-full max-w-2xl bg-white dark:bg-dark rounded-lg shadow-2xl pointer-events-auto transform transition-transform duration-300 ease-out ${
+          className={`relative w-full h-full md:h-auto md:max-w-2xl bg-white dark:bg-dark md:rounded-lg shadow-2xl pointer-events-auto transform transition-transform duration-300 ease-out overflow-y-auto ${
             isAnimating ? "translate-y-0" : "translate-y-full"
           }`}
           onClick={(e) => e.stopPropagation()}
@@ -74,7 +74,7 @@ export function Modal({ isOpen, onClose, children }: ModalProps) {
           {/* Close button */}
           <button
             onClick={onClose}
-            className="absolute right-4 top-4 text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 transition-colors z-10"
+            className="sticky md:absolute right-4 top-4 text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 transition-colors z-10 float-right"
             aria-label="Close modal"
           >
             <svg
@@ -93,7 +93,7 @@ export function Modal({ isOpen, onClose, children }: ModalProps) {
           </button>
 
           {/* Content */}
-          <div className="p-8">
+          <div className="p-6 md:p-8 h-full md:h-auto flex flex-col">
             {children || <ContactForm onClose={onClose} />}
           </div>
         </div>
