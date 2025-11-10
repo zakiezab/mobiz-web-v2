@@ -1,7 +1,5 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
-import { SectionHeader } from "@/components/sections/SectionHeader";
-import { TrendingUp } from "lucide-react";
 
 interface ServiceItem {
   id?: string;
@@ -27,8 +25,6 @@ export function ServicesGrid({
   description,
   services,
 }: ServicesGridProps) {
-  const showHeader = label || title || description;
-  
   return (
     <section id={id} className="bg-white dark:bg-dark py-4 md:py-12">
       <div className="mx-auto w-full max-w-container px-4 md:px-16 2xl:px-6">

@@ -118,10 +118,10 @@ export function ScrollColorTransition({
 
     const handleScroll = () => {
       if (rafIdRef.current) {
-        cancelAnimationFrame(rafIdRef.current)
+        window.cancelAnimationFrame(rafIdRef.current)
       }
 
-      rafIdRef.current = requestAnimationFrame(() => {
+      rafIdRef.current = window.requestAnimationFrame(() => {
         calculateScrollProgress()
       })
     }
@@ -137,7 +137,7 @@ export function ScrollColorTransition({
       window.removeEventListener('scroll', handleScroll)
       window.removeEventListener('resize', handleScroll)
       if (rafIdRef.current) {
-        cancelAnimationFrame(rafIdRef.current)
+        window.cancelAnimationFrame(rafIdRef.current)
       }
     }
   }, [transitionDistance])

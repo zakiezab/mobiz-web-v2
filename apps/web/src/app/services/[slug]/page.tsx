@@ -5,7 +5,6 @@ import { groq } from "next-sanity";
 import { client } from "@/lib/sanity.client";
 import { SERVICE_PAGE_QUERY, ALL_SERVICES_QUERY } from "@/lib/sanity.queries";
 import { STATIC_SERVICES } from "@/lib/static-services";
-import { PageHero } from "@/components/sections/PageHero";
 import { ContactCTA } from "@/components/sections/ContactCTA";
 import { ContentHero } from "@/components/sections/ContentHero";
 import { ScrollColorTransition } from "@/components/sections/ScrollColorTransition";

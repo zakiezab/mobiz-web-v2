@@ -22,7 +22,7 @@ interface PageHeroProps {
 }
 
 export function PageHero({
-  label, 
+  label: _label, 
   title, 
   description, 
   cta, 
@@ -48,7 +48,7 @@ export function PageHero({
 
     const handleScroll = () => {
       if (rafId) {
-        cancelAnimationFrame(rafId)
+        window.cancelAnimationFrame(rafId)
       }
 
       rafId = window.requestAnimationFrame(() => {
@@ -65,7 +65,6 @@ export function PageHero({
         
         // Only calculate parallax when section is visible or recently scrolled past
         const sectionBottom = sectionTop + sectionHeight
-        const viewportBottom = scrollY + windowHeight
         
         // Calculate scroll progress through the section
         // 0 = section hasn't entered viewport yet
@@ -111,7 +110,7 @@ export function PageHero({
       window.removeEventListener('scroll', handleScroll)
       window.removeEventListener('resize', handleScroll)
       if (rafId) {
-        cancelAnimationFrame(rafId)
+        window.cancelAnimationFrame(rafId)
       }
     }
   }, [parallaxSpeed])
