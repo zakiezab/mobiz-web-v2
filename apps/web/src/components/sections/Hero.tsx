@@ -92,7 +92,7 @@ export function Hero({ label: _label, title, highlight, description, cta, metric
               {label}
             </div>
           )} */}
-          <h1 className="!font-metrophobic font-normal text-4xl md:text-7xl leading-tight tracking-tighter text-gray-900 dark:text-secondary-100 mb-6">
+          <h1 className="!font-metrophobic font-normal text-4xl md:text-8xl leading-tight tracking-tighter text-gray-900 dark:text-secondary-100 mb-6">
             {title} <strong className="!font-metrophobic text-gray-900 dark:text-secondary-100">{highlight}</strong>
           </h1>
           <p className="text-base md:text-2xl font-light leading-relaxed text-gray-700 dark:text-secondary-100 max-w-prose mb-12">

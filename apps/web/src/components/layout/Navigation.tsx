@@ -8,7 +8,7 @@ import { AnimatedThemeToggler } from "@/registry/magicui/animated-theme-toggler"
 
 const LINKS = [
   { href: "/#model", label: "Our Model" },
-  { href: "/#services", label: "Execution" },
+  { href: "/services", label: "Services" },
   { href: "/#delivered", label: "Delivered Value" },
   { href: "/#industries", label: "Industries" },
   { href: "/technology-partners", label: "Technology & Partners" },
@@ -27,18 +27,20 @@ export function Navigation() {
   }, []);
 
   useEffect(() => {
-    // Handle smooth scrolling for all anchor links
+    // Handle smooth scrolling for anchor links only (not regular page links)
     const handleClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
       // Check if the clicked element or its parent is a link
       const link = target.closest('a');
       if (link) {
         const href = link.getAttribute("href");
-        // Handle both "#section" and "/#section" formats
-        if (href && (href.startsWith("#") || href.includes("#"))) {
+        if (!href) return;
+        
+        // Handle anchor links (starting with "#" or "/#section" format)
+        if (href.startsWith("#") || (href.startsWith("/#") && href.length > 2)) {
           e.preventDefault();
           // Extract the hash from href (handles both "#section" and "/#section")
-          const hash = href.includes("#") ? href.split("#")[1] : href.substring(1);
+          const hash = href.startsWith("/#") ? href.substring(2) : href.substring(1);
           const element = document.querySelector(`#${hash}`);
           if (element) {
             // Use requestAnimationFrame to ensure accurate position calculation
@@ -55,6 +57,10 @@ export function Navigation() {
             // Close menu if open
             setMenuOpen(false);
           }
+        } else {
+          // For regular page links (like /services, /technology-partners, etc.), just close the menu
+          // Next.js will handle the navigation normally
+          setMenuOpen(false);
         }
       }
     };

@@ -71,6 +71,12 @@
     @apply font-sans;
   }
 
+  /* Ensure main element doesn't add spacing for PageHero */
+  main {
+    margin: 0;
+    padding: 0;
+  }
+
   /* Dark theme - default (when html has .dark class) */
   html.dark body {
     @apply bg-dark text-white;
@@ -103,7 +109,7 @@
   }
 
   .section-header {
-    @apply mx-auto max-w-900 space-y-4;
+    @apply max-w-900 space-y-4;
   }
 
   .section-label {
@@ -111,7 +117,7 @@
   }
 
   .section-title {
-    @apply !font-metrophobic text-gray-900 dark:text-secondary-100 text-4xl md:text-7xl leading-tight tracking-tighter mb-6;
+    @apply !font-metrophobic font-bold text-gray-900 dark:text-secondary-100 text-4xl md:text-7xl leading-tight tracking-tighter mb-6;
   }
 
   .section-description {

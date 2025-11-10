@@ -1,12 +1,12 @@
 'use client'
 
-import {useEffect, useRef, useState} from 'react'
-import type {ReactNode} from 'react'
+import { useEffect, useRef, useState } from 'react'
+import type { ReactNode } from 'react'
 
-import {Button} from '@/components/ui/Button'
+import { Button } from '@/components/ui/Button'
 import Image from 'next/image'
 
-interface PageHeroProps {
+interface ContentHeroProps {
   label: string
   title: ReactNode
   description: ReactNode
@@ -21,17 +21,17 @@ interface PageHeroProps {
   containerClassName?: string // Optional custom className for the content container
 }
 
-export function PageHero({
-  label, 
-  title, 
-  description, 
-  cta, 
-  image, 
+export function ContentHero({
+  label,
+  title,
+  description,
+  cta,
+  image,
   parallaxSpeed = 0.4,
   titleClassName,
   descriptionClassName,
   containerClassName
-}: PageHeroProps) {
+}: ContentHeroProps) {
   // Convert title to string for alt text
   const titleText = typeof title === 'string' ? title : 'Page hero';
   const sectionRef = useRef<HTMLElement>(null)
@@ -58,39 +58,39 @@ export function PageHero({
         const rect = section.getBoundingClientRect()
         const scrollY = window.scrollY
         const windowHeight = window.innerHeight
-        
+
         // Calculate when section enters viewport (when top of section reaches bottom of viewport)
         const sectionTop = section.offsetTop
         const sectionHeight = rect.height
-        
+
         // Only calculate parallax when section is visible or recently scrolled past
         const sectionBottom = sectionTop + sectionHeight
         const viewportBottom = scrollY + windowHeight
-        
+
         // Calculate scroll progress through the section
         // 0 = section hasn't entered viewport yet
         // 1 = section has completely scrolled past
         const scrollStart = sectionTop - windowHeight
         const scrollEnd = sectionBottom
         const scrollRange = scrollEnd - scrollStart
-        
+
         if (scrollRange <= 0) {
           setScrollOffset(0)
           return
         }
-        
+
         const scrollProgress = Math.max(0, Math.min(1, (scrollY - scrollStart) / scrollRange))
-        
+
         // Parallax speed factor controls the movement:
         // - 0 = no movement (static image)
         // - Positive (e.g., 0.4) = image moves up slower than scroll (normal parallax)
         // - Negative (e.g., -0.4) = image moves down (reverse parallax, opposite direction)
         const speed = parallaxSpeed
-        
+
         // Maximum parallax offset (how far image can move)
         // Use absolute value for calculation
         const maxParallaxOffset = sectionHeight * Math.abs(speed)
-        
+
         // Calculate offset: 
         // - Positive speed: offset is positive -> translateY(-offset) moves image up (normal parallax)
         // - Negative speed: offset is negative -> translateY(-negative) = translateY(positive) moves image down (reverse)
@@ -104,8 +104,8 @@ export function PageHero({
     handleScroll()
 
     // Listen to scroll events with throttling via requestAnimationFrame
-    window.addEventListener('scroll', handleScroll, {passive: true})
-    window.addEventListener('resize', handleScroll, {passive: true})
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    window.addEventListener('resize', handleScroll, { passive: true })
 
     return () => {
       window.removeEventListener('scroll', handleScroll)
@@ -117,32 +117,36 @@ export function PageHero({
   }, [parallaxSpeed])
 
   return (
-    <section 
+    <section
       ref={sectionRef}
-      className="relative h-[66vh] min-h-[400px] flex items-end bg-secondary-100 dark:bg-secondary-800 pt-20 pb-4 md:pt-32 md:pb-4 overflow-hidden"
+      className="relative h-[66vh] min-h-[400px] flex items-end bg-gradient-to-tl from-gray-50 via-secondary-300 to-primary/30 dark:from-dark dark:via-secondary-600 dark:to-bg-primary-800 pt-20 pb-4 md:pt-32 md:pb-4 overflow-hidden"
     >
-      {/* Background Image with Parallax Effect */}
+      {/* Image positioned at center right with Parallax Effect */}
       {image && (
-        <div 
-          className="absolute z-0 w-full h-screen"
+        <div
+          className="absolute right-0 top-1/2 z-[2] pointer-events-none"
           style={{
-            transform: `translateY(${-scrollOffset}px)`,
-            willChange: 'transform',
+            transform: `translate(0, calc(-50% + ${parallaxSpeed !== 0 ? -scrollOffset : 0}px))`,
+            willChange: parallaxSpeed !== 0 ? 'transform' : 'auto',
           }}
         >
-          <Image 
-            src={image} 
-            alt={titleText} 
-            fill
-            className="object-contain"
-            priority
-            sizes="100vw"
-          />
+          <div className="relative pr-4 md:pr-16 2xl:pr-6">
+            <div className="relative w-[250px] h-[250px] md:w-[400px] md:h-[400px] lg:w-[500px] lg:h-[500px]">
+              <Image
+                src={image}
+                alt={titleText}
+                fill
+                className="object-contain"
+                priority
+                sizes="(max-width: 768px) 250px, (max-width: 1024px) 400px, 500px"
+              />
+            </div>
+          </div>
         </div>
       )}
       {/* Gradient Overlay */}
       <div
-        className="absolute inset-0 h-full w-full bg-gradient-to-t from-gray-50 via-secondary/0 to-secondary-800/30 dark:from-dark dark:via-dark/80 dark:to-bgdark/0 pointer-events-none z-[1]"
+        className="absolute inset-0 h-full z-10 w-full bg-gradient-to-t from-gray-50 via-secondary/0 to-secondary-800/30 dark:from-dark dark:via-dark/80 dark:to-bgdark/0 pointer-events-none"
       />
       {/* Content */}
       <div className={`relative z-10 mx-auto w-full max-w-container px-4 md:px-16 2xl:px-6 ${containerClassName || ''}`}>

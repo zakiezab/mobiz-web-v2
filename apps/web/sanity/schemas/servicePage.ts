@@ -22,6 +22,22 @@ export default defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: 'category',
+      title: 'Category',
+      type: 'string',
+      options: {
+        list: [
+          {title: 'Cloud Services', value: 'cloud-services'},
+          {title: 'Data & AI', value: 'data-ai'},
+          {title: 'Digital Engineering', value: 'digital-engineering'},
+          {title: 'Modernization', value: 'modernization'},
+        ],
+        layout: 'radio',
+      },
+      validation: (Rule) => Rule.required(),
+      description: 'Service category for filtering and organization.',
+    }),
+    defineField({
       name: 'kicker',
       title: 'Kicker',
       type: 'string',

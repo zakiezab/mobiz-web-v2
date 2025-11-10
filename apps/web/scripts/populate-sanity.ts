@@ -3,7 +3,7 @@
  * Sanity Content Population Script
  *
  * This script populates your Sanity CMS with:
- * - 4 Service Pages for /execution routes
+ * - 5 Service Pages with categories (Cloud Services, Data & AI, Digital Engineering, Modernization)
  * - 8 Case Studies with proper industry/execution tags
  * - 4 Engagement Models
  *
@@ -27,6 +27,7 @@ const servicePages = [
     _type: 'servicePage',
     title: 'Cloud Transformation',
     slug: { _type: 'slug', current: 'cloud-transformation' },
+    category: 'cloud-services',
     kicker: 'Execution /',
     heroHeadline: 'Beyond "Lift & Shift." Cloud-Native Certainty.',
     heroSubheadline: 'Complete cloud transformations with zero disruption, fixed timelines, and guaranteed outcomes. We design, build, and deploy cloud-native architectures that deliver real business value.',
@@ -72,6 +73,7 @@ const servicePages = [
     _type: 'servicePage',
     title: 'AI & Data Platforms',
     slug: { _type: 'slug', current: 'ai-data-platforms' },
+    category: 'data-ai',
     kicker: 'Execution /',
     heroHeadline: 'Production AI. Real Business Value.',
     heroSubheadline: 'From data architecture to production-grade AI models that turn your data into competitive advantage. We build AI platforms that scale, not science projects.',
@@ -117,6 +119,7 @@ const servicePages = [
     _type: 'servicePage',
     title: 'Digital Product Engineering',
     slug: { _type: 'slug', current: 'digital-product-engineering' },
+    category: 'digital-engineering',
     kicker: 'Execution /',
     heroHeadline: 'Mission-Critical Experiences, Engineered.',
     heroSubheadline: 'Customer-facing platforms, APIs, and digital products engineered for enterprise performance. We build the experiences that define your brand and drive your business.',
@@ -162,6 +165,7 @@ const servicePages = [
     _type: 'servicePage',
     title: 'Core System Modernization',
     slug: { _type: 'slug', current: 'core-system-modernization' },
+    category: 'modernization',
     kicker: 'Execution /',
     heroHeadline: 'Replace Legacy Risk. Deploy Modern Certainty.',
     heroSubheadline: 'Legacy system modernization and ERP migrations executed end-to-end. We manage the complexity and risk others avoid, delivering on-time, on-budget transformations.',
@@ -202,6 +206,65 @@ const servicePages = [
     ctaBody: 'Stop living with legacy risk. We execute the modernizations others fear, delivering on-time, on-budget transformations with zero surprises.',
     metaTitle: 'Core System Modernization Services - ERP Migration & Legacy System Transformation | Mobiz',
     metaDescription: 'Legacy system modernization and ERP migrations executed with zero risk. SAP, Oracle, and core system transformations delivered on-time, on-budget.',
+  },
+  {
+    _type: 'servicePage',
+    title: 'Azure Landing Zone',
+    slug: { _type: 'slug', current: 'azure-landing-zone' },
+    category: 'cloud-services',
+    kicker: 'Cloud Services /',
+    heroHeadline: 'Enterprise Azure Foundations, Executed.',
+    heroSubheadline: 'Secure, scalable, and compliant Azure Landing Zones built to enterprise standards. We design, deploy, and operate your Azure foundation with 24/7 managed services.',
+    problemHeadline: 'The Azure Foundation Challenge',
+    problemDescription: 'Organizations rush to Azure without proper foundation, creating security gaps, compliance risks, and scalability issues. DIY landing zones miss critical enterprise requirements. Consultants deliver blueprints but not implementation. The gap between strategy and execution leaves infrastructure vulnerable.',
+    solutionDescription: 'We build production-ready Azure Landing Zones using Microsoft Cloud Adoption Framework and Well-Architected principles. From identity and governance to networking and security, we deliver enterprise-grade foundations ready for workload deployment—then manage and optimize them 24/7.',
+    capabilities: [
+      {
+        _type: 'capability',
+        _key: 'governance',
+        title: 'Governance & Compliance',
+        description: 'Policy-driven governance, RBAC, management groups, and compliance frameworks. Azure Policy, Blueprints, and automation ensuring enterprise control and regulatory compliance.',
+      },
+      {
+        _type: 'capability',
+        _key: 'networking',
+        title: 'Hub-Spoke Network Architecture',
+        description: 'Enterprise-grade networking with Azure Virtual WAN, ExpressRoute, and secure connectivity. Network isolation, firewall rules, traffic management, and hybrid cloud integration.',
+      },
+      {
+        _type: 'capability',
+        _key: 'security',
+        title: 'Zero Trust Security',
+        description: 'Microsoft Defender, Azure Security Center, identity protection, and threat detection. Security baselines meeting CIS, NIST, and industry-specific compliance standards.',
+      },
+      {
+        _type: 'capability',
+        _key: 'automation',
+        title: 'Infrastructure as Code',
+        description: 'Terraform or Bicep-based landing zone automation. Repeatable deployments, version control, and CI/CD pipelines for infrastructure with full auditability.',
+      },
+      {
+        _type: 'capability',
+        _key: 'support',
+        title: '24/7 Managed Services',
+        description: 'Proactive monitoring, incident response, security assessments, and continuous optimization. Azure MSP services with dedicated support and SLA guarantees.',
+      },
+      {
+        _type: 'capability',
+        _key: 'cost',
+        title: 'Cost Management & Optimization',
+        description: 'Right-sizing resources, eliminating waste, and maximizing ROI. Continuous cost monitoring, budgeting, and optimization aligned with business objectives.',
+      },
+    ],
+    proofKicker: 'PROVEN EXECUTION',
+    proofMetric: '100%',
+    proofContext: 'compliance & security standards met',
+    proofBody: 'Enterprise Azure Landing Zones deployed for Fortune 500 organizations across regulated industries. Full compliance with SOC 2, HIPAA, PCI-DSS, and financial services requirements. Zero security incidents in production.',
+    ctaHeadline: 'Ready to Build Your Azure Foundation?',
+    ctaBody: 'Stop compromising on Azure architecture. We build enterprise landing zones that scale, secure, and comply from day one—then manage them with 24/7 expert support.',
+    metaTitle: 'Azure Landing Zone Services - Enterprise Cloud Foundation & Managed Services | Mobiz',
+    metaDescription: 'Production-ready Azure Landing Zones built to Microsoft Cloud Adoption Framework standards. Secure, compliant, and scalable Azure foundations with 24/7 managed services.',
+    metaKeywords: ['azure landing zone', 'azure cloud adoption framework', 'enterprise azure architecture', 'azure governance', 'azure security baseline', 'azure managed services', 'azure msp'],
   },
 ];
 
@@ -764,7 +827,7 @@ async function populateSanity() {
     console.log(`  Dataset: ${client.config().dataset}\n`);
 
     // Create Service Pages
-    console.log('📄 Creating 4 Service Pages...');
+    console.log('📄 Creating 5 Service Pages...');
     for (const service of servicePages) {
       try {
         await client.create(service);

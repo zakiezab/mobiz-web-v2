@@ -5,6 +5,7 @@ export const SERVICE_PAGE_QUERY = groq`
     _id,
     title,
     "slug": slug.current,
+    category,
     kicker,
     heroHeadline,
     heroSubheadline,
@@ -29,6 +30,18 @@ export const SERVICE_PAGE_QUERY = groq`
     ctaHeadline,
     ctaBody,
     metaTitle,
+    metaDescription
+  }
+`;
+
+export const ALL_SERVICES_QUERY = groq`
+  *[_type == "servicePage"] | order(_createdAt asc){
+    _id,
+    title,
+    "slug": slug.current,
+    category,
+    heroHeadline,
+    heroSubheadline,
     metaDescription
   }
 `;

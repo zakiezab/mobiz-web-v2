@@ -125,7 +125,7 @@ export function IndustriesShowcase({
     <section
       // ref={sectionRef}
       id={id}
-      className="bg-white dark:bg-dark py-20"
+      className="bg-secondary-100 dark:bg-dark py-20"
     >
       <div className="mx-auto w-full max-w-container px-4 md:px-16 2xl:px-6">
         <div className="flex flex-col gap-12 md:flex-row md:gap-12 justify-start">
