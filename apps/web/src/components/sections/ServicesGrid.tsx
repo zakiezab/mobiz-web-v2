@@ -20,9 +20,9 @@ interface ServicesGridProps {
 
 export function ServicesGrid({
   id,
-  label,
-  title,
-  description,
+  label: _label,
+  title: _title,
+  description: _description,
   services,
 }: ServicesGridProps) {
   return (
