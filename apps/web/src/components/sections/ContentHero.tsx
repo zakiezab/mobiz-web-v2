@@ -122,7 +122,7 @@ export function ContentHero({
       {/* Image positioned at center right with Parallax Effect */}
       {image && (
         <div
-          className="absolute right-0 top-1/3 z-50 pointer-events-none"
+          className="absolute right-0 top-1/3 z-[2] md:z-50 pointer-events-none"
           style={{
             transform: `translate(0, calc(-50% + ${parallaxSpeed !== 0 ? -scrollOffset : 0}px))`,
             willChange: parallaxSpeed !== 0 ? 'transform' : 'auto',

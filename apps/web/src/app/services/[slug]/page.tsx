@@ -11,8 +11,9 @@ import { ContactCTA } from "@/components/sections/ContactCTA";
 import { ContentHero } from "@/components/sections/ContentHero";
 import { ScrollColorTransition } from "@/components/sections/ScrollColorTransition";
 import { SectionHeader } from "@/components/sections/SectionHeader";
-import { ArrowDownCircleIcon, ArrowUpRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { Button } from "@/components/ui/Button";
+import { ScrollFadeArrow } from "@/components/ui/ScrollFadeArrow";
 
 const SERVICE_KEYWORD_MAP: Record<string, string[]> = {
   "cloud-transformation": [
@@ -247,9 +248,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
         image={heroImage}
         parallaxSpeed={-0.4}
       />
-      <div className="absolute bottom-20 z-50 w-full mx-auto flex justify-center items-center animate-bounce p-12">
-        <ArrowDownCircleIcon className="w-10 h-10 text-gray-50" />
-      </div>
+      <ScrollFadeArrow />
       {service.problemHeadline && (
         <ScrollColorTransition
           fromBg="#130E23" // dark
