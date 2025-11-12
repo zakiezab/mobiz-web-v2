@@ -9,7 +9,6 @@ import { ContactCTA } from "@/components/sections/ContactCTA";
 import { ContentHero } from "@/components/sections/ContentHero";
 import { ScrollColorTransition } from "@/components/sections/ScrollColorTransition";
 import { SectionHeader } from "@/components/sections/SectionHeader";
-import { ScrollGradientOverlay } from "@/components/sections/ScrollGradientOverlay";
 
 const SERVICE_KEYWORD_MAP: Record<string, string[]> = {
   "cloud-transformation": [
