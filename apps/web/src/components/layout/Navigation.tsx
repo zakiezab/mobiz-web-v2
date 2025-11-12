@@ -10,6 +10,7 @@ import { ScrollGradientOverlay } from "../sections/ScrollGradientOverlay";
 const LINKS = [
   { href: "/#model", label: "Our Model" },
   { href: "/services", label: "Services" },
+  { href: "/case-studies", label: "Case Studies" },
   { href: "/#delivered", label: "Delivered Value" },
   { href: "/#industries", label: "Industries" },
   { href: "/technology-partners", label: "Technology & Partners" },

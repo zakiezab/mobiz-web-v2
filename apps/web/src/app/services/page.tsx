@@ -1,7 +1,8 @@
 import { Metadata } from "next";
 import { client } from "@/lib/sanity.client";
 import { ALL_SERVICES_QUERY } from "@/lib/sanity.queries";
-import { STATIC_SERVICES } from "@/lib/static-services";
+// Static services disabled - all services now come from Sanity CMS
+// To restore, see static-services.backup.ts
 import { PageHero } from "@/components/sections/PageHero";
 import { ServicesGrid } from "@/components/sections/ServicesGrid";
 import { ContactCTA } from "@/components/sections/ContactCTA";
@@ -83,19 +84,8 @@ export default async function ServicesPage({
         console.warn("Could not fetch services from Sanity:", error);
     }
 
-    // Convert static services to the same format as Sanity services
-    const staticServicesArray = Object.values(STATIC_SERVICES).map((service) => ({
-        _id: `static-${service.slug}`,
-        title: service.title,
-        slug: service.slug,
-        category: service.category,
-        heroHeadline: service.heroHeadline,
-        heroSubheadline: service.heroSubheadline,
-        metaDescription: service.metaDescription,
-    }));
-
-    // Combine Sanity and static services
-    const allServices = [...sanityServices, ...staticServicesArray];
+    // Only use Sanity services (static services disabled)
+    const allServices = sanityServices;
 
     // Await searchParams (Next.js 15+)
     const params = await searchParams;

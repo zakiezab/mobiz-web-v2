@@ -6,7 +6,8 @@ import { groq } from "next-sanity";
 import { unstable_noStore as noStore } from "next/cache";
 import { client } from "@/lib/sanity.client";
 import { SERVICE_PAGE_QUERY, ALL_SERVICES_QUERY } from "@/lib/sanity.queries";
-import { STATIC_SERVICES } from "@/lib/static-services";
+// Static services disabled - all services now come from Sanity CMS
+// To restore, see static-services.backup.ts
 import { ContactCTA } from "@/components/sections/ContactCTA";
 import { ContentHero } from "@/components/sections/ContentHero";
 import { ScrollColorTransition } from "@/components/sections/ScrollColorTransition";
@@ -68,7 +69,7 @@ interface ServicePageProps {
 export const revalidate = 60;
 
 export async function generateStaticParams() {
-  // Get services from Sanity
+  // Get services from Sanity only (static services disabled)
   let sanityServices: any[] = [];
   try {
     sanityServices = await client.fetch(
@@ -78,16 +79,8 @@ export async function generateStaticParams() {
     console.warn("Could not fetch services from Sanity:", error);
   }
 
-  // Combine Sanity services with static services
-  const staticSlugs = Object.keys(STATIC_SERVICES).map((slug) => ({ slug }));
-  const allServices = [...sanityServices, ...staticSlugs];
-
-  // Remove duplicates
-  const uniqueServices = Array.from(
-    new Map(allServices.map((service) => [service.slug, service])).values()
-  );
-
-  return uniqueServices;
+  // Only return Sanity services (static services are disabled)
+  return sanityServices;
 }
 
 export async function generateMetadata({
@@ -95,17 +88,7 @@ export async function generateMetadata({
 }: ServicePageProps): Promise<Metadata> {
   const { slug } = await params;
 
-  // Check static services first
-  const staticService = STATIC_SERVICES[slug];
-  if (staticService) {
-    return {
-      title: staticService.metaTitle || staticService.title,
-      description: staticService.metaDescription || staticService.heroSubheadline,
-      keywords: staticService.metaKeywords || SERVICE_KEYWORD_MAP[slug] || ["execution partner", "mobiz services"],
-    };
-  }
-
-  // Fall back to Sanity
+  // Fetch service metadata from Sanity only (static services disabled)
   let service = null;
   try {
     // Fetch from Sanity - in development, CDN is disabled for fresh data
@@ -139,17 +122,13 @@ export default async function ServicePage({ params }: ServicePageProps) {
     noStore();
   }
 
-  // Check static services first
-  let service: any = STATIC_SERVICES[slug];
-
-  // Fall back to Sanity if not found in static services
-  if (!service) {
-    try {
-      // Fetch from Sanity - in development, CDN is disabled and noStore() ensures fresh data
-      service = await client.fetch(SERVICE_PAGE_QUERY, { slug });
-    } catch (error) {
-      console.warn("Could not fetch service from Sanity:", error);
-    }
+  // Fetch service from Sanity only (static services disabled)
+  let service: any = null;
+  try {
+    // Fetch from Sanity - in development, CDN is disabled and noStore() ensures fresh data
+    service = await client.fetch(SERVICE_PAGE_QUERY, { slug });
+  } catch (error) {
+    console.warn("Could not fetch service from Sanity:", error);
   }
 
   if (!service) {
@@ -203,22 +182,11 @@ export default async function ServicePage({ params }: ServicePageProps) {
   let relatedServices: any[] = [];
   if (service.category) {
     try {
-      // Get services from Sanity - in development, CDN is disabled for fresh data
+      // Get services from Sanity only (static services disabled)
       const sanityServices = await client.fetch(ALL_SERVICES_QUERY);
 
-      // Convert static services to the same format
-      const staticServicesArray = Object.values(STATIC_SERVICES).map((s) => ({
-        _id: `static-${s.slug}`,
-        title: s.title,
-        slug: s.slug,
-        category: s.category,
-        heroHeadline: s.heroHeadline,
-        heroSubheadline: s.heroSubheadline,
-        metaDescription: s.metaDescription,
-      }));
-
-      // Combine and filter
-      const allCategoryServices = [...sanityServices, ...staticServicesArray]
+      // Filter related services from same category (only Sanity services)
+      const allCategoryServices = sanityServices
         .filter((s: any) => s.category === service.category && s.slug !== slug)
         .slice(0, 4); // Limit to 4 related services
 
@@ -316,20 +284,20 @@ export default async function ServicePage({ params }: ServicePageProps) {
               {service.capabilities.map((capability: any, index: number) => {
                 const capabilityImageUrl = getImageUrl(capability.image);
                 return (
-                  <div key={index} className="flex flex-row items-start gap-4 bg-secondary-300/10 border border-secondary-300/50 p-6 md:p-8 rounded-3xl">
+                  <div key={index} className="flex flex-col md:flex-row items-start gap-4 bg-secondary-300/10 border border-secondary-300/50 p-6 md:p-6 rounded-3xl">
                     {capabilityImageUrl && (
-                      <div className="relative w-full h-[200px] mb-6 rounded-xl overflow-hidden">
+                      <div className="relative w-full h-[200px] rounded-xl overflow-hidden">
                         <Image
                           src={capabilityImageUrl}
                           alt={capability.title || `Capability ${index + 1}`}
                           fill
-                          className="object-contain"
+                          className="object-contain object-top"
                           sizes="w-[200px] h-[200px]"
                         />
                       </div>
                     )}
                     <div className="flex flex-col gap-2">
-                      <h3 className="text-3xl font-bold text-gray-800 mb-4">
+                      <h3 className="text-3xl font-bold text-gray-800 mb-2">
                         {capability.title}
                       </h3>
                       {capability.description && (
@@ -348,8 +316,8 @@ export default async function ServicePage({ params }: ServicePageProps) {
 
       {/* Features Section */}
       {service.featuresSection && (
-        <section className="bg-gray-50 py-20 md:py-40">
-          <div className="mx-auto w-full max-w-container px-4 md:px-16 2xl:px-6">
+        <section className="bg-gray-100 py-16 md:py-32">
+          <div className="mx-auto w-full max-w-container px-4 md:px-6 2xl:px-6">
             <div className="mb-12 flex justify-center">
               <div className="max-w-4xl w-full">
                 <SectionHeader
@@ -378,11 +346,11 @@ export default async function ServicePage({ params }: ServicePageProps) {
             )}
 
             {service.featuresSection.items && service.featuresSection.items.length > 0 && (
-              <div className="grid gap-6 md:gap-8 md:grid-cols-2 lg:grid-cols-3">
+              <div className="grid gap-6 md:gap-8 md:grid-cols-2 lg:grid-cols-3 max-w-container px-4 md:px-16 2xl:px-6 mx-auto">
                 {service.featuresSection.items.map((item: any, index: number) => {
                   const itemImageUrl = getImageUrl(item.image);
                   return (
-                    <div key={index} className="bg-gray-50 p-6 rounded-2xl">
+                    <div key={index} className="bg-secondary-300/10 border border-secondary-300/50 p-6 rounded-2xl">
                       {itemImageUrl && (
                         <div className="relative w-full h-48 mb-4 rounded-lg overflow-hidden">
                           <Image
@@ -394,11 +362,11 @@ export default async function ServicePage({ params }: ServicePageProps) {
                           />
                         </div>
                       )}
-                      <h3 className="text-xl font-bold text-gray-900 dark:text-secondary-100 mb-2">
+                      <h3 className="text-xl font-bold text-gray-800 mb-2">
                         {item.title}
                       </h3>
                       {item.description && (
-                        <p className="text-base leading-relaxed text-gray-700 dark:text-secondary-200">
+                        <p className="text-base leading-relaxed text-gray-600">
                           {item.description}
                         </p>
                       )}
@@ -421,7 +389,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
               : undefined;
 
             return (
-              <section key={sectionIndex} className={`bg-gray-50 py-20 md:py-40`}>
+              <section key={sectionIndex} className={`bg-gray-50 py-12 md:py-20`}>
                 <div className="mx-auto w-full max-w-container px-4 md:px-16 2xl:px-6">
                   {section.alignment === 'center' ? (
                     // Center alignment: image below text
@@ -733,16 +701,22 @@ export default async function ServicePage({ params }: ServicePageProps) {
         </section>
       )}
 
-      {service.ctaHeadline && (
-        <ContactCTA
-          title={service.ctaHeadline}
-          description={
-            service.ctaBody ||
-            "Ready to transform your business? Let's start the conversation."
-          }
-          ctaLabel="Start the Conversation"
-        />
-      )}
+      <ContactCTA
+        title={
+          service.ctaHeadline || (
+            <>
+              Ready to transform your business?
+              <br />
+              Let's start the conversation.
+            </>
+          )
+        }
+        description={
+          service.ctaBody ||
+          "Stop talking about transformation. Start executing it. We're ready to build. Let's start the conversation."
+        }
+        ctaLabel="Start the Conversation"
+      />
     </>
   );
 }
