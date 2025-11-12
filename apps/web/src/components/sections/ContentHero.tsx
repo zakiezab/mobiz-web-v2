@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from 'react'
 import type { ReactNode } from 'react'
-
 import { Button } from '@/components/ui/Button'
 import Image from 'next/image'
 
@@ -118,7 +117,7 @@ export function ContentHero({
   return (
     <section
       ref={sectionRef}
-      className="relative h-[66vh] min-h-[400px] flex items-end bg-gradient-to-tl from-gray-50 via-secondary-300 to-primary/30 dark:from-dark dark:via-secondary-600 dark:to-bg-primary-800 pt-20 pb-4 md:pt-32 md:pb-4 overflow-hidden"
+      className="relative h-[66vh] min-h-[400px] flex items-end bg-gradient-to-tl from-dark via-secondary-600 to-bg-primary-800 pt-20 pb-4 md:pt-32 md:pb-4 overflow-hidden"
     >
       {/* Image positioned at center right with Parallax Effect */}
       {image && (
@@ -145,17 +144,17 @@ export function ContentHero({
       )}
       {/* Gradient Overlay */}
       <div
-        className="absolute inset-0 h-full z-10 w-full bg-gradient-to-t from-gray-50 via-secondary/0 to-secondary-800/30 dark:from-dark dark:via-dark/80 dark:to-bgdark/0 pointer-events-none"
+        className="absolute inset-0 h-full z-10 w-full bg-gradient-to-t from-dark via-dark/80 to-bgdark/0 pointer-events-none"
       />
       {/* Content */}
       <div className={`relative z-10 mx-auto w-full max-w-container px-4 md:px-16 2xl:px-6 ${containerClassName || ''}`}>
         <div className="max-w-3xl space-y-8">
           {/* <p className="section-label">{label}</p> */}
-          <h1 className={titleClassName || "!font-metrophobic font-normal text-2xl md:text-6xl leading-tight tracking-tighter text-secondary-900 dark:text-secondary-100 mb-6"}>
+          <h1 className={titleClassName || "!font-metrophobic font-normal text-4xl md:text-6xl leading-tight tracking-tighter text-secondary-100 mb-6"}>
             {title}
           </h1>
           {description && (
-            <p className={descriptionClassName || "section-description"}>
+            <p className={descriptionClassName || "text-base md:text-xl font-light leading-relaxed text-secondary-100 max-w-prose"}>
               {description}
             </p>
           )}

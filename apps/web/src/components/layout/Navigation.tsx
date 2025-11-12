@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { ArrowRight } from "lucide-react";
 import { Button } from "../ui/Button";
 import { AnimatedThemeToggler } from "@/registry/magicui/animated-theme-toggler";
+import { ScrollGradientOverlay } from "../sections/ScrollGradientOverlay";
 
 const LINKS = [
   { href: "/#model", label: "Our Model" },
@@ -83,6 +84,8 @@ export function Navigation() {
         className={`fixed inset-x-0 top-0 z-50 bg-transparent transition-all duration-300 ${scrolled ? "shadow-[0_1px_0_rgba(0,0,0,0.04)] backdrop-blur-md" : ""
           }`}
       >
+        {/* Scroll-based gradient overlay - fixed at top of viewport, fades in on scroll */}
+      <ScrollGradientOverlay />
         <nav
           className={`w-full max-w-container mx-auto flex items-center px-4 md:px-16 2xl:px-6 justify-between text-sm text-dark transition-all duration-300 ${scrolled ? "py-4" : "py-7"
             }`}

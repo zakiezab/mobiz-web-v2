@@ -132,7 +132,7 @@ export default async function ServicesPage({
                 description="Full-stack execution services across cloud transformation, AI platforms, digital product engineering, and core system modernization. We don't just advise. We execute."
                 image="/images/service-hero.png"
                 parallaxSpeed={-0.4}
-                titleClassName="!font-metrophobic font-normal text-4xl md:text-9xl leading-tight tracking-tighter text-secondary-900 dark:text-secondary-100 mb-6"
+                titleClassName="!font-metrophobic font-bold text-4xl md:text-9xl leading-tight tracking-tighter text-secondary-900 dark:text-secondary-100 mb-6"
             />
             <div className="bg-secondary-100 dark:bg-dark">
                 <ServiceCategoryFilter />

@@ -9,6 +9,7 @@ import { ContactCTA } from "@/components/sections/ContactCTA";
 import { ContentHero } from "@/components/sections/ContentHero";
 import { ScrollColorTransition } from "@/components/sections/ScrollColorTransition";
 import { SectionHeader } from "@/components/sections/SectionHeader";
+import { ScrollGradientOverlay } from "@/components/sections/ScrollGradientOverlay";
 
 const SERVICE_KEYWORD_MAP: Record<string, string[]> = {
   "cloud-transformation": [
@@ -205,6 +206,9 @@ export default async function ServicePage({ params }: ServicePageProps) {
 
   return (
     <>
+      {/* Scroll-based gradient overlay - fixed at top of viewport, fades in on scroll */}
+      {/* <ScrollGradientOverlay /> */}
+      
       <ContentHero
         label={heroLabel}
         title={service.heroHeadline}
@@ -244,11 +248,11 @@ export default async function ServicePage({ params }: ServicePageProps) {
                 </div>
               </div>
               {service.solutionDescription && (
-                <div className="w-full bg-secondary-300/20 border border-secondary-300/50 flex items-center justify-between p-6 md:p-8 rounded-3xl backdrop-blur-sm shadow-lg">
-                  <p className="!font-metrophobic w-1/2 text-6xl font-bold mb-4" style={{ color: 'inherit' }}>
+                <div className="w-full bg-secondary-300/20 border border-secondary-300/50 flex flex-col md:flex-row items-center justify-between p-6 md:p-8 rounded-3xl backdrop-blur-sm shadow-lg">
+                  <p className="!font-metrophobic w-full md:w-1/2 text-4xl md:text-6xl font-bold mb-4" style={{ color: 'inherit' }}>
                     Our Solution
                   </p>
-                  <div className="w-1/2 text-lg leading-relaxed whitespace-pre-line text-gray-600 font-normal">
+                  <div className="w-full md:w-1/2 text-lg leading-relaxed whitespace-pre-line text-gray-600 font-normal">
                     {service.solutionDescription}
                   </div>
                 </div>

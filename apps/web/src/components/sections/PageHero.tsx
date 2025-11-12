@@ -147,7 +147,7 @@ export function PageHero({
       <div className={`relative z-10 mx-auto w-full max-w-container px-4 md:px-16 2xl:px-6 ${containerClassName || ''}`}>
         <div className="max-w-3xl space-y-8">
           {/* <p className="section-label">{label}</p> */}
-          <h1 className={titleClassName || "!font-metrophobic font-normal text-2xl md:text-6xl leading-tight tracking-tighter text-secondary-900 dark:text-secondary-100 mb-6"}>
+          <h1 className={titleClassName || "!font-metrophobic font-bold text-4xl md:text-6xl leading-tight tracking-tighter text-secondary-900 dark:text-secondary-100 mb-6"}>
             {title}
           </h1>
           {description && (

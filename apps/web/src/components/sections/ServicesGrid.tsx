@@ -38,22 +38,22 @@ export function ServicesGrid({
             />
           </div>
         )} */}
-        <div className="grid gap-8 md:gap-20 md:grid-cols-2">
+        <div className="grid gap-16 md:gap-20 md:grid-cols-2 p-4">
           {services.map((service, index) => {
             // Use id, href, or fallback to title + index for unique key
             const uniqueKey = service.id || service.href || `${service.title}-${index}`;
             
             const content = (
               <>
-                <div className="w-8 h-8 md:w-12 md:h-12 bg-primary-300/20 border border-primary-300 rounded-xl md:rounded-xl flex items-center justify-center text-lg md:text-xl !font-metrophobic text-primary dark:text-primary-100">
+                <div className="w-8 h-8 md:w-12 md:h-12 bg-primary-300/20 border border-primary-300 rounded-xl md:rounded-xl flex items-center justify-center text-sm md:text-xl !font-metrophobic text-primary dark:text-primary-100">
                   {service.number}
                 </div>
                 <div className="space-y-3">
-                  <h3 className="!font-metrophobic text-gray-900 dark:text-secondary-100 text-xl md:text-2xl leading-tight tracking-tighter mb-6">
+                  <h3 className="!font-metrophobic text-gray-900 dark:text-secondary-100 text-2xl md:text-3xl leading-tight tracking-tighter mb-4">
                     {service.title}
                   </h3>
                   {service.description && (
-                    <p className="text-base md:text-xl font-light leading-relaxed text-gray-700 dark:text-secondary-100 max-w-prose">
+                    <p className="text-base md:text-xl font-light leading-relaxed text-gray-500 dark:text-secondary-300 max-w-prose">
                       {service.description}
                     </p>
                   )}
@@ -71,7 +71,7 @@ export function ServicesGrid({
                 <Link
                   key={uniqueKey}
                   href={service.href}
-                  className="grid grid-cols-[auto_1fr] gap-8 group hover:bg-gray-50 dark:hover:bg-white/5 border border-gray-100 dark:border-secondary-800 p-6 -m-6 rounded-3xl transition-all"
+                  className="grid grid-cols-[auto_1fr] gap-4 md:gap-8 group hover:bg-gray-50 dark:hover:bg-white/5 border border-gray-100 dark:border-secondary-800 p-4 -m-6 rounded-3xl transition-all"
                 >
                   {content}
                 </Link>
