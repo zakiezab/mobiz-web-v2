@@ -1,9 +1,9 @@
 'use client'
 
-import {useEffect, useRef, useState} from 'react'
-import type {ReactNode} from 'react'
+import { useEffect, useRef, useState } from 'react'
+import type { ReactNode } from 'react'
 
-import {Button} from '@/components/ui/Button'
+import { Button } from '@/components/ui/Button'
 import Image from 'next/image'
 
 interface PageHeroProps {
@@ -22,11 +22,11 @@ interface PageHeroProps {
 }
 
 export function PageHero({
-  label: _label, 
-  title, 
-  description, 
-  cta, 
-  image, 
+  label: _label,
+  title,
+  description,
+  cta,
+  image,
   parallaxSpeed = 0.4,
   titleClassName,
   descriptionClassName,
@@ -58,38 +58,38 @@ export function PageHero({
         const rect = section.getBoundingClientRect()
         const scrollY = window.scrollY
         const windowHeight = window.innerHeight
-        
+
         // Calculate when section enters viewport (when top of section reaches bottom of viewport)
         const sectionTop = section.offsetTop
         const sectionHeight = rect.height
-        
+
         // Only calculate parallax when section is visible or recently scrolled past
         const sectionBottom = sectionTop + sectionHeight
-        
+
         // Calculate scroll progress through the section
         // 0 = section hasn't entered viewport yet
         // 1 = section has completely scrolled past
         const scrollStart = sectionTop - windowHeight
         const scrollEnd = sectionBottom
         const scrollRange = scrollEnd - scrollStart
-        
+
         if (scrollRange <= 0) {
           setScrollOffset(0)
           return
         }
-        
+
         const scrollProgress = Math.max(0, Math.min(1, (scrollY - scrollStart) / scrollRange))
-        
+
         // Parallax speed factor controls the movement:
         // - 0 = no movement (static image)
         // - Positive (e.g., 0.4) = image moves up slower than scroll (normal parallax)
         // - Negative (e.g., -0.4) = image moves down (reverse parallax, opposite direction)
         const speed = parallaxSpeed
-        
+
         // Maximum parallax offset (how far image can move)
         // Use absolute value for calculation
         const maxParallaxOffset = sectionHeight * Math.abs(speed)
-        
+
         // Calculate offset: 
         // - Positive speed: offset is positive -> translateY(-offset) moves image up (normal parallax)
         // - Negative speed: offset is negative -> translateY(-negative) = translateY(positive) moves image down (reverse)
@@ -103,8 +103,8 @@ export function PageHero({
     handleScroll()
 
     // Listen to scroll events with throttling via requestAnimationFrame
-    window.addEventListener('scroll', handleScroll, {passive: true})
-    window.addEventListener('resize', handleScroll, {passive: true})
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    window.addEventListener('resize', handleScroll, { passive: true })
 
     return () => {
       window.removeEventListener('scroll', handleScroll)
@@ -116,22 +116,22 @@ export function PageHero({
   }, [parallaxSpeed])
 
   return (
-    <section 
+    <section
       ref={sectionRef}
       className="relative h-[66vh] min-h-[400px] flex items-end bg-secondary-100 dark:bg-secondary-800 pt-20 pb-4 md:pt-32 md:pb-4 overflow-hidden"
     >
       {/* Background Image with Parallax Effect */}
       {image && (
-        <div 
+        <div
           className="absolute z-0 w-full h-screen"
           style={{
             transform: `translateY(${-scrollOffset}px)`,
             willChange: 'transform',
           }}
         >
-          <Image 
-            src={image} 
-            alt={titleText} 
+          <Image
+            src={image}
+            alt={titleText}
             fill
             className="object-contain"
             priority

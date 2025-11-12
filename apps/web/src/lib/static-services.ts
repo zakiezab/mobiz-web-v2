@@ -15,6 +15,30 @@ export interface StaticService {
   capabilities?: Array<{
     title: string;
     description: string;
+    image?: string; // Optional image path
+  }>;
+  featuresSection?: {
+    kicker?: string;
+    title: string;
+    description?: string;
+    image?: string; // Optional image path
+    items?: Array<{
+      image?: string; // Optional image path
+      title: string;
+      description?: string;
+    }>;
+  };
+  additionalSections?: Array<{
+    kicker?: string;
+    title: string;
+    description?: string;
+    media?: {
+      type: 'image' | 'video';
+      image?: string; // Image path if type is 'image'
+      videoUrl?: string; // Video URL if type is 'video'
+      videoFile?: string; // Video file path if type is 'video'
+    };
+    alignment?: 'start' | 'center' | 'end';
   }>;
   proofKicker?: string;
   proofMetric?: string;

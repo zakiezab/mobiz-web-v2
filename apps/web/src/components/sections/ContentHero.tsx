@@ -122,7 +122,7 @@ export function ContentHero({
       {/* Image positioned at center right with Parallax Effect */}
       {image && (
         <div
-          className="absolute right-0 top-1/2 z-[2] pointer-events-none"
+          className="absolute right-0 top-1/3 z-50 pointer-events-none"
           style={{
             transform: `translate(0, calc(-50% + ${parallaxSpeed !== 0 ? -scrollOffset : 0}px))`,
             willChange: parallaxSpeed !== 0 ? 'transform' : 'auto',
@@ -136,7 +136,8 @@ export function ContentHero({
                 fill
                 className="object-contain"
                 priority
-                sizes="(max-width: 768px) 250px, (max-width: 1024px) 400px, 500px"
+                sizes="100vw"
+              // sizes="(max-width: 768px) 250px, (max-width: 1024px) 400px, 500px"
               />
             </div>
           </div>
@@ -147,10 +148,10 @@ export function ContentHero({
         className="absolute inset-0 h-full z-10 w-full bg-gradient-to-t from-dark via-dark/80 to-bgdark/0 pointer-events-none"
       />
       {/* Content */}
-      <div className={`relative z-10 mx-auto w-full max-w-container px-4 md:px-16 2xl:px-6 ${containerClassName || ''}`}>
+      <div className={`relative z-10 mx-auto w-full max-w-container px-4 md:px-16 2xl:px-6 mb-12 ${containerClassName || ''}`}>
         <div className="max-w-3xl space-y-8">
           {/* <p className="section-label">{label}</p> */}
-          <h1 className={titleClassName || "!font-metrophobic font-normal text-4xl md:text-6xl leading-tight tracking-tighter text-secondary-100 mb-6"}>
+          <h1 className={titleClassName || "!font-metrophobic font-normal text-4xl md:text-7xl leading-tight tracking-tighter text-secondary-100 mb-6"}>
             {title}
           </h1>
           {description && (

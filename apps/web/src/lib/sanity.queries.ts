@@ -9,12 +9,107 @@ export const SERVICE_PAGE_QUERY = groq`
     kicker,
     heroHeadline,
     heroSubheadline,
+    heroImage{
+      asset->{
+        _id,
+        url,
+        altText,
+        metadata{
+          dimensions{
+            width,
+            height,
+            aspectRatio
+          }
+        }
+      }
+    },
     problemHeadline,
     problemDescription,
     solutionDescription,
     capabilities[]{
       title,
-      description
+      description,
+      image{
+        asset->{
+          _id,
+          url,
+          altText,
+          metadata{
+            dimensions{
+              width,
+              height,
+              aspectRatio
+            }
+          }
+        }
+      }
+    },
+    featuresSection{
+      kicker,
+      title,
+      description,
+      image{
+        asset->{
+          _id,
+          url,
+          altText,
+          metadata{
+            dimensions{
+              width,
+              height,
+              aspectRatio
+            }
+          }
+        }
+      },
+      items[]{
+        image{
+          asset->{
+            _id,
+            url,
+            altText,
+            metadata{
+              dimensions{
+                width,
+                height,
+                aspectRatio
+              }
+            }
+          }
+        },
+        title,
+        description
+      }
+    },
+    additionalSections[]{
+      kicker,
+      title,
+      description,
+      media{
+        type,
+        image{
+          asset->{
+            _id,
+            url,
+            altText,
+            metadata{
+              dimensions{
+                width,
+                height,
+                aspectRatio
+              }
+            }
+          }
+        },
+        videoUrl,
+        videoFile{
+          asset->{
+            _id,
+            url
+          }
+        }
+      },
+      alignment
     },
     proofKicker,
     proofMetric,
