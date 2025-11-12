@@ -421,14 +421,6 @@ export default async function ServicePage({ params }: ServicePageProps) {
               ? (section.media.videoUrl || (section.media.videoFile?.asset?.url))
               : undefined;
 
-            // Determine alignment classes
-            const alignmentClasses = {
-              start: 'justify-start text-left',
-              center: 'justify-center text-center',
-              end: 'justify-end text-right',
-            };
-            const alignmentClass = alignmentClasses[section.alignment as keyof typeof alignmentClasses] || alignmentClasses.start;
-
             return (
               <section key={sectionIndex} className={`bg-gray-50 py-20 md:py-40`}>
                 <div className="mx-auto w-full max-w-container px-4 md:px-16 2xl:px-6">
