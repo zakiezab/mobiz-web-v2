@@ -35,7 +35,98 @@ export function Footer() {
             </p>
           </div>
 
-          
+          {/* What We Execute Column */}
+          {/* <div>
+            <h4 className="text-sm tracking-wider uppercase text-gray-500 dark:text-secondary-300 mb-6">
+              What We Execute
+            </h4>
+            <Link
+              href="/#services"
+              className="block text-sm font-light text-gray-600 dark:text-secondary-200 mb-3 transition-colors duration-200 hover:text-gray-900 dark:hover:text-primary-300"
+            >
+              Cloud Transformation
+            </Link>
+            <Link
+              href="/#services"
+              className="block text-sm font-light text-gray-600 dark:text-secondary-200 mb-3 transition-colors duration-200 hover:text-gray-900 dark:hover:text-primary-300"
+            >
+              AI & Data Platforms
+            </Link>
+            <Link
+              href="/#services"
+              className="block text-sm font-light text-gray-600 dark:text-secondary-200 mb-3 transition-colors duration-200 hover:text-gray-900 dark:hover:text-primary-300"
+            >
+              Digital Product Engineering
+            </Link>
+            <Link
+              href="/#services"
+              className="block text-sm font-light text-gray-600 dark:text-secondary-200 mb-3 transition-colors duration-200 hover:text-gray-900 dark:hover:text-primary-300"
+            >
+              Core System Modernization
+            </Link>
+          </div> */}
+
+          {/* About Mobiz Column */}
+          {/* <div>
+            <h4 className="text-sm tracking-wider uppercase text-gray-500 dark:text-secondary-300 mb-6">
+              About Mobiz
+            </h4>
+            <Link
+              href="/#model"
+              className="block text-sm font-light text-gray-600 dark:text-secondary-200 mb-3 transition-colors duration-200 hover:text-gray-900 dark:hover:text-primary-300"
+            >
+              Our Model
+            </Link>
+            <Link
+              href="/#delivered"
+              className="block text-sm font-light text-gray-600 dark:text-secondary-200 mb-3 transition-colors duration-200 hover:text-gray-900 dark:hover:text-primary-300"
+            >
+              Delivered Value
+            </Link>
+            <Link
+              href="#"
+              className="block text-sm font-light text-gray-600 dark:text-secondary-200 mb-3 transition-colors duration-200 hover:text-gray-900 dark:hover:text-primary-300"
+            >
+              Thought Leadership
+            </Link>
+            <Link
+              href="#"
+              className="block text-sm font-light text-gray-600 dark:text-secondary-200 mb-3 transition-colors duration-200 hover:text-gray-900 dark:hover:text-primary-300"
+            >
+              Careers
+            </Link>
+          </div> */}
+
+          {/* Industries Column */}
+          {/* <div>
+            <h4 className="text-sm tracking-wider uppercase text-gray-500 dark:text-secondary-300 mb-6">
+              Industries
+            </h4>
+            <Link
+              href="/#industries"
+              className="block text-sm font-light text-gray-600 dark:text-secondary-200 mb-3 transition-colors duration-200 hover:text-gray-900 dark:hover:text-primary-300"
+            >
+              Financial Services
+            </Link>
+            <Link
+              href="/#industries"
+              className="block text-sm font-light text-gray-600 dark:text-secondary-200 mb-3 transition-colors duration-200 hover:text-gray-900 dark:hover:text-primary-300"
+            >
+              Healthcare
+            </Link>
+            <Link
+              href="/#industries"
+              className="block text-sm font-light text-gray-600 dark:text-secondary-200 mb-3 transition-colors duration-200 hover:text-gray-900 dark:hover:text-primary-300"
+            >
+              Manufacturing
+            </Link>
+            <Link
+              href="/#industries"
+              className="block text-sm font-light text-gray-600 dark:text-secondary-200 mb-3 transition-colors duration-200 hover:text-gray-900 dark:hover:text-primary-300"
+            >
+              Energy & Utilities
+            </Link>
+          </div> */}
         </div>
 
         {/* Footer Bottom */}
