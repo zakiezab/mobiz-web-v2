@@ -1,10 +1,9 @@
-import Link from "next/link";
-import Image from "next/image";
 import { Metadata } from "next";
 import { ContactCTA } from "@/components/sections/ContactCTA";
 import { PageHero } from "@/components/sections/PageHero";
 import { client } from "@/lib/sanity.client";
 import { CASE_STUDIES_QUERY } from "@/lib/sanity.queries";
+import { CaseStudiesList } from "@/components/sections/CaseStudiesList";
 
 type CaseStudyCard = {
   _id: string;
@@ -13,6 +12,8 @@ type CaseStudyCard = {
   kicker?: string;
   metricLarge?: string;
   metricContext?: string;
+  industry?: string;
+  executionType?: string;
   featuredImage?: {
     asset?: {
       url?: string;
@@ -43,52 +44,21 @@ export default async function CaseStudiesPage() {
     <>
       <PageHero
         label="Case Studies"
-        title="Proof, Not Promises"
+        title={<span>Proof, <br/><strong>Not Promises</strong></span>}
         description="A selection of outcomes delivered in production. Zero handoffs. 100% accountability."
+        titleClassName="!font-metrophobic font-bold text-4xl md:text-9xl leading-tight tracking-tighter mb-6"
       />
 
-      <section className="bg-white py-40">
-        <div className="mx-auto w-full max-w-container px-20">
+      <section className="bg-gray-50 dark:bg-dark py-4 md:pt-12 md:pb-40">
+        <div className="mx-auto w-full max-w-container px-4 md:px-16 2xl:px-6">
           {caseStudies.length === 0 ? (
-            <div className="max-w-3xl text-center">
-              <p className="text-xl font-light text-gray-600">
+            <div className="max-w-3xl mx-auto text-center">
+              <p className="text-xl font-light text-gray-600 dark:text-secondary-200">
                 Case studies are coming soon. Check back as we publish outcomes from our execution model.
               </p>
             </div>
           ) : (
-            <div className="grid gap-16 md:grid-cols-2">
-              {caseStudies.map((study) => (
-                <article key={study._id} className="group rounded-lg border border-gray-100 bg-gray-50 p-8 transition-transform duration-300 hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(0,0,0,0.08)]">
-                  <Link href={`/case-studies/${study.slug}`} className="block space-y-6">
-                    {study.featuredImage?.asset?.url && (
-                      <div className="relative aspect-[16/9] overflow-hidden rounded-md bg-white">
-                        <Image
-                          src={study.featuredImage.asset.url}
-                          alt={study.featuredImage.asset.altText || study.title || "Case study"}
-                          fill
-                          className="object-cover transition-transform duration-300 group-hover:scale-105"
-                          sizes="(min-width: 1024px) 480px, 100vw"
-                        />
-                      </div>
-                    )}
-                    <div className="space-y-4">
-                      <div className="text-sm font-semibold uppercase tracking-wider text-secondary">
-                        {study.kicker}
-                      </div>
-                      <h2 className="text-2xl font-light text-dark group-hover:text-primary">
-                        {study.title}
-                      </h2>
-                      <div className="text-4xl font-light text-primary">
-                        {study.metricLarge}
-                      </div>
-                      <p className="text-base font-light leading-relaxed text-gray-700">
-                        {study.metricContext}
-                      </p>
-                    </div>
-                  </Link>
-                </article>
-              ))}
-            </div>
+            <CaseStudiesList caseStudies={caseStudies} />
           )}
         </div>
       </section>

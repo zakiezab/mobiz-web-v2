@@ -6,11 +6,13 @@ import { Button } from '@/components/ui/Button'
 import Image from 'next/image'
 
 interface ContentHeroProps {
-  label: string
+  label?: string
   title: ReactNode
-  description: ReactNode
+  description?: ReactNode
   image?: string
   parallaxSpeed?: number // Controls parallax effect: 0 = no movement, positive = slower scroll, negative = reverse scroll
+  industry?: string // Optional industry category
+  executionType?: string // Optional execution type category
   cta?: {
     label: string
     href: string
@@ -27,6 +29,8 @@ export function ContentHero({
   cta,
   image,
   parallaxSpeed = 0.4,
+  industry,
+  executionType,
   titleClassName,
   descriptionClassName,
   containerClassName
@@ -122,7 +126,7 @@ export function ContentHero({
       {/* Image positioned at center right with Parallax Effect */}
       {image && (
         <div
-          className="absolute right-0 top-1/3 z-[2] md:z-20 pointer-events-none"
+          className="absolute right-0 top-1/3 z-[2] md:z-10 pointer-events-none"
           style={{
             transform: `translate(0, calc(-50% + ${parallaxSpeed !== 0 ? -scrollOffset : 0}px))`,
             willChange: parallaxSpeed !== 0 ? 'transform' : 'auto',
@@ -150,7 +154,7 @@ export function ContentHero({
       {/* Content */}
       <div className={`relative z-10 mx-auto w-full max-w-container px-4 md:px-16 2xl:px-6 mb-12 ${containerClassName || ''}`}>
         <div className="max-w-3xl space-y-8">
-          {/* <p className="section-label">{label}</p> */}
+          <p className="section-label">{_label}</p>
           <h1 className={titleClassName || "!font-metrophobic font-normal text-4xl md:text-7xl leading-tight tracking-tighter text-secondary-100 mb-6"}>
             {title}
           </h1>
@@ -158,6 +162,27 @@ export function ContentHero({
             <p className={descriptionClassName || "text-base md:text-xl font-light leading-relaxed text-secondary-100 max-w-prose"}>
               {description}
             </p>
+          )}
+          {/* Industry and Execution Type Tags */}
+          {(industry || executionType) && (
+            <div className="flex flex-wrap gap-3 mb-4">
+              {industry && (
+                <div className="flex flex-col px-4 py-2 bg-white/10 backdrop-blur-sm rounded-xl border border-white/20 text-xs text-secondary-300">
+                  Industry:
+                  <span className="text-sm font-medium text-secondary-100 capitalize">
+                    {industry}
+                  </span>
+                </div>
+              )}
+              {executionType && (
+                <div className="flex flex-col px-4 py-2 bg-white/10 backdrop-blur-sm rounded-xl border border-white/20 text-xs text-secondary-300">
+                  Execution type:
+                  <span className="text-sm font-medium text-secondary-100 capitalize">
+                    {executionType}
+                  </span>
+                </div>
+              )}
+            </div>
           )}
           {cta && <Button href={cta.href}>{cta.label}</Button>}
         </div>

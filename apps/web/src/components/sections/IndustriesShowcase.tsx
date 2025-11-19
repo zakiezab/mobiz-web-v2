@@ -1,7 +1,7 @@
 // 'use client'
 
 import { SectionHeader } from "./SectionHeader";
-import { Landmark, Heart, Factory, Zap, ShoppingCart, Building, LucideIcon } from 'lucide-react';
+import Image from 'next/image';
 
 // import { useEffect, useRef, useState } from 'react'
 
@@ -11,13 +11,13 @@ interface IndustryItem {
 }
 
 // Icon mapping for each industry
-const industryIcons: Record<string, LucideIcon> = {
-  'Financial Services': Landmark,
-  'Healthcare': Heart,
-  'Manufacturing': Factory,
-  'Energy': Zap,
-  'Retail': ShoppingCart,
-  'Government': Building,
+const industryIcons: Record<string, string> = {
+  'Financial Services': '/images/icons/ico-financial-services.png',
+  'Healthcare': '/images/icons/ico-health.png',
+  'Manufacturing': '/images/icons/ico-manufacturing.png',
+  'Energy': '/images/icons/ico-energy.png',
+  'Retail': '/images/icons/ico-retail.png',
+  'Government': '/images/icons/ico-government.png',
 };
 
 interface IndustriesShowcaseProps {
@@ -147,7 +147,7 @@ export function IndustriesShowcase({
             className="grid grid-cols-1 md:grid-cols-2 gap-4 md:basis-7/12"
           >
             {industries.map((industry) => {
-              const Icon = industryIcons[industry.name];
+              const iconPath = industryIcons[industry.name];
 
               return (
                 <div
@@ -155,9 +155,15 @@ export function IndustriesShowcase({
                   className="bg-secondary-100 dark:bg-secondary-800/20 p-6 rounded-3xl flex flex-col gap-4 min-h-[280px] transition-all duration-300 hover:bg-secondary-200 dark:hover:bg-secondary-800/70 hover:scale-[1.02] group"
                 >
                   {/* Icon */}
-                  {Icon && (
+                  {iconPath && (
                     <div className="w-full flex flex-shrink-0 justify-end">
-                      <Icon className="w-12 h-12 text-primary transition-transform duration-300 group-hover:scale-110" />
+                      <Image
+                        src={iconPath}
+                        alt={`${industry.name} icon`}
+                        width={48}
+                        height={48}
+                        className="transition-transform duration-300 group-hover:scale-110"
+                      />
                     </div>
                   )}
 

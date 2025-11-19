@@ -26,7 +26,7 @@ export function ServicesGrid({
   services,
 }: ServicesGridProps) {
   return (
-    <section id={id} className="bg-white dark:bg-dark py-4 md:py-12">
+    <section id={id} className="bg-gray-50 dark:bg-dark py-4 md:py-12">
       <div className="mx-auto w-full max-w-container px-4 md:px-16 2xl:px-6">
         {/* {showHeader && (
           <div className="mb-12 md:mb-20">
@@ -71,7 +71,7 @@ export function ServicesGrid({
                 <Link
                   key={uniqueKey}
                   href={service.href}
-                  className="grid grid-cols-[auto_1fr] gap-4 md:gap-8 group hover:bg-gray-50 dark:hover:bg-white/5 border border-gray-100 dark:border-secondary-800 p-4 -m-6 rounded-3xl transition-all"
+                  className="grid grid-cols-[auto_1fr] gap-4 md:gap-8 group hover:bg-white dark:hover:bg-white/5 border border-gray-200 dark:border-secondary-800 p-4 -m-6 hover:scale-105 hover:shadow-xl rounded-3xl transition-all duration-300"
                 >
                   {content}
                 </Link>

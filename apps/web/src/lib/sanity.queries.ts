@@ -372,3 +372,85 @@ export const HOMEPAGE_QUERY = groq`
     }
   }
 `;
+
+export const CATEGORIES_QUERY = groq`
+  *[_type == "category"] | order(key asc){
+    _id,
+    key,
+    label,
+    description,
+    image{
+      asset->{
+        _id,
+        url,
+        altText,
+        metadata{
+          dimensions{
+            width,
+            height,
+            aspectRatio
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const ABOUT_US_PAGE_QUERY = groq`
+  *[_type == "aboutUsPage"][0]{
+    _id,
+    heroLabel,
+    heroTitle,
+    heroDescription,
+    missionTitle,
+    missionContent,
+    visionTitle,
+    visionContent,
+    valuesTitle,
+    values[]{
+      title,
+      description
+    },
+    leadershipTitle,
+    leadershipDescription,
+    leadershipTeam[]{
+      name,
+      title,
+      image{
+        asset->{
+          _id,
+          url,
+          altText,
+          metadata{
+            dimensions{
+              width,
+              height,
+              aspectRatio
+            }
+          }
+        }
+      },
+      bio
+    },
+    certificationsTitle,
+    certifications[]{
+      category,
+      items
+    },
+    awards,
+    ctaTitle,
+    ctaDescription,
+    ctaLabel,
+    seo{
+      title,
+      description,
+      keywords,
+      ogImage{
+        asset->{
+          _id,
+          url
+        }
+      }
+    }
+  }
+`;

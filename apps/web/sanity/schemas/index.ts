@@ -1,5 +1,7 @@
+import aboutUsPage from "./aboutUsPage";
 import article from "./article";
 import caseStudy from "./caseStudy";
+import category from "./category";
 import contactSubmission from "./contactSubmission";
 import deliveredValuePage from "./deliveredValuePage";
 import engagementModel from "./engagementModel";
@@ -20,4 +22,6 @@ export const schemaTypes = [
   contactSubmission,
   executionPage,
   deliveredValuePage,
+  aboutUsPage,
+  category,
 ];

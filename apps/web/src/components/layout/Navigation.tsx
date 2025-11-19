@@ -8,12 +8,13 @@ import { AnimatedThemeToggler } from "@/registry/magicui/animated-theme-toggler"
 import { ScrollGradientOverlay } from "../sections/ScrollGradientOverlay";
 
 const LINKS = [
-  { href: "/#model", label: "Our Model" },
+  // { href: "/#model", label: "Our Model" },
   { href: "/services", label: "Services" },
   { href: "/case-studies", label: "Case Studies" },
-  { href: "/#delivered", label: "Delivered Value" },
-  { href: "/#industries", label: "Industries" },
-  { href: "/technology-partners", label: "Technology & Partners" },
+  { href: "/about-us", label: "About Us" },
+  // { href: "/#delivered", label: "Delivered Value" },
+  // { href: "/#industries", label: "Industries" },
+  // { href: "/technology-partners", label: "Technology & Partners" },
 ];
 
 export function Navigation() {

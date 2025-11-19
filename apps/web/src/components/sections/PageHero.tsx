@@ -7,11 +7,12 @@ import { Button } from '@/components/ui/Button'
 import Image from 'next/image'
 
 interface PageHeroProps {
-  label: string
+  label?: string
   title: ReactNode
   description: ReactNode
   image?: string
   parallaxSpeed?: number // Controls parallax effect: 0 = no movement, positive = slower scroll, negative = reverse scroll
+  height?: 'default' | 'full' // Controls hero height: 'default' (66vh) or 'full' (100vh)
   cta?: {
     label: string
     href: string
@@ -28,6 +29,7 @@ export function PageHero({
   cta,
   image,
   parallaxSpeed = 0.4,
+  height = 'default',
   titleClassName,
   descriptionClassName,
   containerClassName
@@ -115,10 +117,14 @@ export function PageHero({
     }
   }, [parallaxSpeed])
 
+  const heightClass = height === 'full' 
+    ? 'h-screen min-h-[400px]' 
+    : 'h-[66vh] min-h-[400px]';
+
   return (
     <section
       ref={sectionRef}
-      className="relative h-[66vh] min-h-[400px] flex items-end bg-secondary-100 dark:bg-secondary-800 pt-20 pb-4 md:pt-32 md:pb-4 overflow-hidden"
+      className={`relative ${heightClass} flex items-end bg-secondary-100 dark:bg-secondary-800 pt-20 pb-4 md:pt-32 md:pb-4 overflow-hidden`}
     >
       {/* Background Image with Parallax Effect */}
       {image && (
@@ -145,11 +151,13 @@ export function PageHero({
       />
       {/* Content */}
       <div className={`relative z-10 mx-auto w-full max-w-container px-4 md:px-16 2xl:px-6 ${containerClassName || ''}`}>
-        <div className="max-w-3xl space-y-8">
-          {/* <p className="section-label">{label}</p> */}
-          <h1 className={titleClassName || "!font-metrophobic font-bold text-4xl md:text-6xl leading-tight tracking-tighter text-secondary-900 dark:text-secondary-100 mb-6"}>
-            {title}
-          </h1>
+        <div className="max-w-3xl space-y-2 pb-12">
+          <div className="flex flex-col gap-1">
+            <p className="section-label">{_label}</p>
+            <h1 className={titleClassName || "!font-metrophobic font-bold text-4xl md:text-6xl leading-tight tracking-tighter text-secondary-900 dark:text-secondary-100 mb-6"}>
+              {title}
+            </h1>
+          </div>
           {description && (
             <p className={descriptionClassName || "section-description"}>
               {description}

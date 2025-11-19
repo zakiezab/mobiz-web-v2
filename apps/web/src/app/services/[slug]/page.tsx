@@ -139,7 +139,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
   const categoryLabel = service.category
     ? CATEGORY_LABELS[service.category]
     : null;
-  const heroLabel = service.kicker
+  const _heroLabel = service.kicker
     ? service.kicker
     : categoryLabel
       ? `${categoryLabel} /`
@@ -210,7 +210,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
       {/* <ScrollGradientOverlay /> */}
 
       <ContentHero
-        label={heroLabel}
+        // label={heroLabel}
         title={service.heroHeadline}
         description={service.heroSubheadline}
         image={heroImage}
