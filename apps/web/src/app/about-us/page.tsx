@@ -24,7 +24,7 @@ export async function generateMetadata(): Promise<Metadata> {
       "About Us - Mobiz | Pioneering diversity-driven, tech-fueled innovation",
     description:
       aboutUs?.seo?.description ||
-      "Empowering businesses with best-in-class services and solutions. Learn about our mission, vision, values, and world-class leadership team.",
+      "Pioneering diversity-driven, tech-fueled innovation for a limitless future.",
     keywords:
       aboutUs?.seo?.keywords || [
         "about mobiz",
@@ -195,7 +195,7 @@ export default async function AboutUsPage() {
   const heroTitle = formatHeroTitle(aboutUs?.heroTitle);
   const heroDescription =
     aboutUs?.heroDescription ||
-    "Empowering businesses with best-in-class services and solutions that align with their strategic objectives and enable them to achieve their business goals.";
+    "Pioneering diversity-driven, tech-fueled innovation for a limitless future.";
 
   const missionTitle = aboutUs?.missionTitle || "Our Mission";
   const missionContent =
@@ -212,11 +212,11 @@ export default async function AboutUsPage() {
   const valuesTitle = aboutUs?.valuesTitle || "Our Values";
   const values = aboutUs?.values || VALUES;
 
-  const leadershipTitle = aboutUs?.leadershipTitle || "Meet the Leadership Team";
-  const leadershipDescription =
+  const _leadershipTitle = aboutUs?.leadershipTitle || "Meet the Leadership Team";
+  const _leadershipDescription =
     aboutUs?.leadershipDescription ||
     "We are led by a world-class team of experts";
-  const leadershipTeam = aboutUs?.leadershipTeam || LEADERSHIP_TEAM;
+  const _leadershipTeam = aboutUs?.leadershipTeam || LEADERSHIP_TEAM;
 
   const certificationsTitle =
     aboutUs?.certificationsTitle || "Certifications & Awards";
@@ -230,7 +230,7 @@ export default async function AboutUsPage() {
   const ctaLabel = aboutUs?.ctaLabel || "Start the Conversation";
 
   // Helper function to get image URL from Sanity asset
-  const getImageUrl = (imageAsset: any): string | undefined => {
+  const _getImageUrl = (imageAsset: any): string | undefined => {
     if (!imageAsset) return undefined;
     if (typeof imageAsset === "string") return imageAsset;
     if (imageAsset?.asset?.url) return imageAsset.asset.url;
@@ -244,21 +244,21 @@ export default async function AboutUsPage() {
         title={heroTitle}
         description={heroDescription}
         titleClassName="!font-metrophobic font-bold text-4xl md:text-9xl leading-tight tracking-tighter text-secondary-900 dark:text-secondary-100 mb-6"
-        height="full"
+        // height="full"
       />
 
       {/* Mission Section */}
-      <section className="bg-gray-50 dark:bg-dark py-20 md:py-40">
+      <section className="bg-gray-50 dark:bg-dark py-20 md:py-20">
         <div className="mx-auto w-full max-w-container px-4 md:px-16 2xl:px-6">
-          <div className="max-w-4xl mx-auto">
-            <div className="mb-12 flex justify-center">
+          <div className="flex justify-between w-full mx-auto border-b border-gray-200 dark:border-secondary-800 pb-12">
+            <div className="w-full mb-4 flex">
               <SectionHeader
                 title={missionTitle}
-                align="center"
-                // titleClassName="text-gray-900 dark:text-secondary-100 font-bold"
+                align="left"
+              // titleClassName="text-gray-900 dark:text-secondary-100 font-bold"
               />
             </div>
-            <div className="space-y-6 text-center">
+            <div className="w-full space-y-6">
               {missionContent.map((paragraph: string, index: number) => (
                 <p
                   key={index}
@@ -269,23 +269,20 @@ export default async function AboutUsPage() {
               ))}
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* Vision Section */}
-      <section className="bg-white dark:bg-dark py-20 md:py-40">
-        <div className="mx-auto w-full max-w-container px-4 md:px-16 2xl:px-6">
-          <div className="max-w-4xl mx-auto">
-            <div className="mb-12 flex justify-center">
+          {/* Vision Section */}
+          <div className="flex justify-between w-full mx-auto pt-12">
+            <div className="w-full mb-4 flex">
               <SectionHeader
                 title={visionTitle}
-                align="center"
-                titleClassName="text-gray-900 dark:text-secondary-100 font-bold"
+                align="left"
+                // titleClassName="text-gray-900 dark:text-secondary-100 font-bold"
               />
             </div>
-            <p className="text-xl font-light leading-relaxed text-gray-700 dark:text-secondary-200 text-center">
-              {visionContent}
-            </p>
+            <div className="w-full space-y-6">
+              <p className="text-xl font-light leading-relaxed text-gray-700 dark:text-secondary-200">
+                {visionContent}
+              </p>
+            </div>
           </div>
         </div>
       </section>
@@ -302,16 +299,16 @@ export default async function AboutUsPage() {
               />
             </div>
           </div>
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4 max-w-container mx-auto">
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4 max-w-container mx-auto">
             {values.map((value: any, index: number) => (
               <div
                 key={index}
-                className="bg-secondary-300/10 border border-secondary-300/50 p-6 rounded-2xl"
+                className="bg-white rounded-2xl p-6 shadow-xl flex flex-col gap-2"
               >
-                <h3 className="text-xl font-bold text-gray-900 dark:text-secondary-100 mb-3">
+                <h3 className="text-3xl font-bold text-gray-900 mb-3">
                   {value.title}
                 </h3>
-                <p className="text-base leading-relaxed text-gray-700 dark:text-secondary-200">
+                <p className="text-base leading-relaxed text-gray-600">
                   {value.description}
                 </p>
               </div>
@@ -321,21 +318,21 @@ export default async function AboutUsPage() {
       </section>
 
       {/* Leadership Team Section */}
-      <section className="bg-white dark:bg-dark py-20 md:py-40">
+      {/* <section className="bg-white py-20 md:py-40">
         <div className="mx-auto w-full max-w-container px-4 md:px-16 2xl:px-6">
           <div className="max-w-4xl mx-auto">
             <div className="mb-12 flex justify-center">
               <SectionHeader
-                title={leadershipTitle}
-                description={leadershipDescription}
+                title={_leadershipTitle}
+                description={_leadershipDescription}
                 align="center"
                 titleClassName="text-gray-900 dark:text-secondary-100 font-bold"
                 descriptionClassName="text-gray-600 dark:text-secondary-200"
               />
             </div>
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-              {leadershipTeam.map((member: any, index: number) => {
-                const memberImageUrl = getImageUrl(member.image);
+              {_leadershipTeam.map((member: any, index: number) => {
+                const memberImageUrl = _getImageUrl(member.image);
                 return (
                   <div
                     key={index}
@@ -369,10 +366,10 @@ export default async function AboutUsPage() {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Certifications & Awards Section */}
-      <section className="bg-gray-50 py-20 md:py-40">
+      <section className="bg-white py-20 md:py-40">
         <div className="mx-auto w-full max-w-container px-4 md:px-16 2xl:px-6">
           <div className="mb-12 flex justify-center">
             <SectionHeader
@@ -385,43 +382,88 @@ export default async function AboutUsPage() {
           {/* Certifications */}
           {certifications.length > 0 && (
             <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 mb-12">
-              {certifications.map((cert: any, index: number) => (
-              <div
-                key={index}
-                className="bg-white dark:bg-secondary-800/20 border border-gray-200 dark:border-secondary-800 p-6 rounded-2xl"
-              >
-                <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4">
-                  {cert.category}
-                </h3>
-                <ul className="space-y-2">
-                  {cert.items.map((item: string, itemIndex: number) => (
-                    <li
-                      key={itemIndex}
-                      className="text-sm font-light text-gray-700 dark:text-secondary-200"
-                    >
-                      • {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              ))}
+              {certifications.map((cert: any, index: number) => {
+                const categoryImageUrl = cert.image?.asset?.url;
+                return (
+                  <div
+                    key={index}
+                    className="bg-gray-50  border border-gray-200  p-6 rounded-2xl"
+                  >
+                    {categoryImageUrl && (
+                      <div className="relative w-full max-w-[200px] h-20 mb-4">
+                        <Image
+                          src={categoryImageUrl}
+                          alt={cert.category || `Category ${index + 1}`}
+                          fill
+                          className="object-contain"
+                          sizes="(max-width: 768px) 200px, 200px"
+                        />
+                      </div>
+                    )}
+                    <h3 className="text-2xl font-bold text-gray-900 mb-6">
+                      {cert.category}
+                    </h3>
+                    <ul className="space-y-4 list-none">
+                    {cert.items.map((item: any, itemIndex: number) => {
+                      const itemImageUrl = item.image?.asset?.url;
+                      return (
+                        <li
+                          key={itemIndex}
+                          className="flex items-center gap-3 text-sm font-normal text-gray-600"
+                        >
+                          {itemImageUrl && (
+                            <div className="relative w-12 h-12 flex-shrink-0">
+                              <Image
+                                src={itemImageUrl}
+                                alt={item.name || `Certification ${itemIndex + 1}`}
+                                fill
+                                className="object-contain"
+                                sizes="48px"
+                              />
+                            </div>
+                          )}
+                          <span className="flex-1">{item.name || item}</span>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </div>
+                );
+              })}
             </div>
           )}
 
           {/* Awards */}
           {awards && awards.length > 0 && (
-            <div className="max-w-4xl mx-auto">
+            <div className="w-full mx-auto">
               <div className="grid gap-4 md:grid-cols-2">
-                {awards.map((award: string, index: number) => (
-                  <div
-                    key={index}
-                    className="bg-white dark:bg-secondary-800/20 border border-gray-200 dark:border-secondary-800 p-6 rounded-2xl text-center"
-                  >
-                    <p className="text-lg font-semibold text-gray-900 dark:text-white">
-                      {award}
-                    </p>
-                  </div>
-                ))}
+                {awards.map((award: any, index: number) => {
+                  // Handle both old format (string) and new format (object with name and image)
+                  const awardName = typeof award === 'string' ? award : award?.name;
+                  const awardImageUrl = typeof award === 'object' && award?.image?.asset?.url ? award.image.asset.url : undefined;
+                  
+                  return (
+                    <div
+                      key={index}
+                      className="flex flex-col gap-0 border border-gray-200 p-6 rounded-2xl text-center w-full"
+                    >
+                      <p className="text-2xl font-semibold text-gray-900">
+                        {awardName}
+                      </p>
+                      {awardImageUrl && (
+                        <div className="relative w-full max-w-[400px] h-[400px] mx-auto">
+                          <Image
+                            src={awardImageUrl}
+                            alt={awardName || `Award ${index + 1}`}
+                            fill
+                            className="object-contain"
+                            sizes="(max-width: 768px) 400px, 200px"
+                          />
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
               </div>
             </div>
           )}

@@ -180,10 +180,48 @@ export default defineType({
               description: "Category name (e.g., 'Microsoft', 'Palo Alto Networks').",
             }),
             defineField({
+              name: "image",
+              title: "Category Logo",
+              type: "image",
+              options: {
+                hotspot: true,
+              },
+              description: "Optional category logo/image. Recommended size: 300x150px.",
+            }),
+            defineField({
               name: "items",
               title: "Certifications",
               type: "array",
-              of: [{ type: "string" }],
+              of: [
+                {
+                  type: "object",
+                  name: "certificationItem",
+                  title: "Certification Item",
+                  fields: [
+                    defineField({
+                      name: "name",
+                      title: "Certification Name",
+                      type: "string",
+                      validation: (Rule) => Rule.required(),
+                    }),
+                    defineField({
+                      name: "image",
+                      title: "Logo",
+                      type: "image",
+                      options: {
+                        hotspot: true,
+                      },
+                      description: "Optional certification logo. Recommended size: 200x100px.",
+                    }),
+                  ],
+                  preview: {
+                    select: {
+                      title: "name",
+                      media: "image",
+                    },
+                  },
+                },
+              ],
               validation: (Rule) => Rule.required().min(1),
             }),
           ],
@@ -191,6 +229,7 @@ export default defineType({
             select: {
               title: "category",
               subtitle: "items",
+              media: "image",
             },
             prepare({ title, subtitle }) {
               const count = Array.isArray(subtitle) ? subtitle.length : 0;
@@ -207,8 +246,38 @@ export default defineType({
       name: "awards",
       title: "Awards",
       type: "array",
-      of: [{ type: "string" }],
-      description: "Awards and recognitions (e.g., 'Minority Business Enterprise Certified').",
+      of: [
+        {
+          type: "object",
+          name: "award",
+          title: "Award",
+          fields: [
+            defineField({
+              name: "name",
+              title: "Award Name",
+              type: "string",
+              validation: (Rule) => Rule.required(),
+              description: "Award or recognition name (e.g., 'Minority Business Enterprise Certified').",
+            }),
+            defineField({
+              name: "image",
+              title: "Award Logo",
+              type: "image",
+              options: {
+                hotspot: true,
+              },
+              description: "Optional award logo/image. Recommended size: 300x150px.",
+            }),
+          ],
+          preview: {
+            select: {
+              title: "name",
+              media: "image",
+            },
+          },
+        },
+      ],
+      description: "Awards and recognitions.",
     }),
     defineField({
       name: "ctaTitle",

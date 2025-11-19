@@ -435,9 +435,55 @@ export const ABOUT_US_PAGE_QUERY = groq`
     certificationsTitle,
     certifications[]{
       category,
-      items
+      image{
+        asset->{
+          _id,
+          url,
+          altText,
+          metadata{
+            dimensions{
+              width,
+              height,
+              aspectRatio
+            }
+          }
+        }
+      },
+      items[]{
+        name,
+        image{
+          asset->{
+            _id,
+            url,
+            altText,
+            metadata{
+              dimensions{
+                width,
+                height,
+                aspectRatio
+              }
+            }
+          }
+        }
+      }
     },
-    awards,
+    awards[]{
+      name,
+      image{
+        asset->{
+          _id,
+          url,
+          altText,
+          metadata{
+            dimensions{
+              width,
+              height,
+              aspectRatio
+            }
+          }
+        }
+      }
+    },
     ctaTitle,
     ctaDescription,
     ctaLabel,
