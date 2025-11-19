@@ -27,6 +27,10 @@ export const metadata: Metadata = {
   title: 'Mobiz | Strategy, Executed.',
   description:
     'The execution partner for F500 technology leaders. We architect, build, and deploy production-grade systems. Zero handoffs. 100% accountability.',
+  icons: {
+    icon: '/icon.png',
+    apple: '/apple-icon.png',
+  },
 }
 
 export default function RootLayout({
