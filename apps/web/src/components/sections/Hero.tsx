@@ -64,6 +64,7 @@ function MetricDisplay({ value, label }: HeroMetric) {
 
 export function Hero({ label: _label, title, highlight, description, cta, metrics }: HeroProps) {
   const [scrollProgress, setScrollProgress] = useState(0)
+  const [videoError, setVideoError] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -80,9 +81,26 @@ export function Hero({ label: _label, title, highlight, description, cta, metric
 
   return (
     <section className="fixed inset-0 min-h-screen flex items-end justify-center bg-white dark:bg-dark z-[1] bg-[url('/images/background02.png')] dark:bg-[url('/images/background.png')] bg-cover bg-bottom-left">
+      {/* Fallback background image - shows if video fails to load */}
+      {videoError && (
+        <div className="absolute inset-0 w-full h-full bg-[url('/images/background02.png')] dark:bg-[url('/images/background.png')] bg-cover bg-bottom-left" />
+      )}
+      {/* Background video */}
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className={`absolute inset-0 w-full h-full object-cover object-bottom-left ${videoError ? 'hidden' : ''}`}
+        onError={() => setVideoError(true)}
+      >
+        <source src="/images/hero_showreel.mp4" type="video/mp4" />
+      </video>
+      {/* Video overlay for better text readability */}
+      <div className="absolute inset-0 bg-gradient-to-b from-white/40 via-white/30 to-white/20 dark:from-black/30 dark:via-black/20 dark:to-black/50 pointer-events-none" />
       {/* Gradient overlay that fades in as you scroll - inside section so it doesn't block interactions */}
       <div
-        className="absolute inset-0 bg-gradient-to-b from-gray-200/50 via-gray-300/50 to-gray-400/50 dark:from-secondary dark:via-dark dark:to-bgdark pointer-events-none"
+        className="absolute inset-0 bg-gradient-to-b from-gray-200/50 via-gray-300/50 to-gray-400/50 dark:from-secondary-800 dark:via-dark dark:to-bgdark pointer-events-none"
         style={{ opacity: scrollProgress }}
       />
       <div className="w-full max-w-container px-4 md:px-16 2xl:px-6 relative z-10 flex justify-between pb-28 md:pb-8">
@@ -95,7 +113,7 @@ export function Hero({ label: _label, title, highlight, description, cta, metric
           <h1 className="!font-metrophobic font-normal text-4xl md:text-8xl leading-tight tracking-tighter text-gray-900 dark:text-secondary-100 mb-6">
             {title} <strong className="!font-metrophobic text-gray-900 dark:text-secondary-100">{highlight}</strong>
           </h1>
-          <p className="text-base md:text-2xl font-light leading-relaxed text-gray-700 dark:text-secondary-100 max-w-prose mb-12">
+          <p className="text-base md:text-2xl font-light leading-relaxed text-gray-900 dark:text-secondary-100 max-w-prose mb-12">
             {description}
           </p>
           <Button href={cta.href} className="flex items-center gap-2 hover:gap-4 shadow-none hover:shadow-[0_12px_32px_rgba(216,36,42,0.2)] transition-all duration-500">
