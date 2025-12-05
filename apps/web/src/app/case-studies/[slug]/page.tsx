@@ -20,23 +20,6 @@ interface CaseStudyPageProps {
 
 export const revalidate = 3600;
 
-// Helper function to check if results array has actual content
-function hasResultsContent(results: any[] | null | undefined): boolean {
-  if (!results || !Array.isArray(results) || results.length === 0) {
-    return false;
-  }
-
-  // Check if any block has text content
-  return results.some((block) => {
-    if (block._type === 'block' && block.children) {
-      return block.children.some((child: any) => {
-        return child.text && child.text.trim().length > 0;
-      });
-    }
-    return false;
-  });
-}
-
 export async function generateMetadata({
   params,
 }: CaseStudyPageProps): Promise<Metadata> {
