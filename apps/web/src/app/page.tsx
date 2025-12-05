@@ -72,7 +72,7 @@ const FALLBACK_DATA = {
       description:
         "AI platform for R&D, featured by Microsoft for its impact. Built and scaled by our team.",
       videoLink: {
-        href: "#",
+        href: "/case-studies/sanofi-gains-speed-and-agility-with-an-azure-hybrid-cloud-strategy",
         label: "Watch the Microsoft Case Study",
       },
     },

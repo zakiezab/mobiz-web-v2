@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { SectionHeader } from "@/components/sections/SectionHeader";
 import { useCountUp } from "@/hooks/useCountUp";
 import { ArrowUpRight } from "lucide-react";
@@ -70,13 +71,13 @@ function StoryCard({ story }: { story: DeliveredStory }) {
           {story.description}
         </p>
         {story.videoLink && (
-          <a
+          <Link
             href={story.videoLink.href}
             className="flex items-center gap-1 mt-3 text-sm font-medium text-primary hover:text-primary-300 transition-colors duration-200"
           >
             {story.videoLink.label} →
             <ArrowUpRight className="w-5 h-5" />
-          </a>
+          </Link>
         )}
       </div>
     </div>

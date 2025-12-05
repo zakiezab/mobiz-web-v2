@@ -94,16 +94,102 @@ export default defineType({
       of: [{type: 'string'}],
     }),
     defineField({
+      name: 'clientQuotes',
+      title: 'Client Quotes',
+      type: 'array',
+      description: 'Optional client testimonial quotes. Add multiple quotes to create a carousel.',
+      of: [
+        {
+          type: 'object',
+          fields: [
+            defineField({
+              name: 'text',
+              title: 'Quote Text',
+              type: 'text',
+              rows: 4,
+              description: 'The testimonial quote from the client.',
+            }),
+            defineField({
+              name: 'name',
+              title: 'Name',
+              type: 'string',
+              description: 'Name of the person who provided the quote.',
+            }),
+            defineField({
+              name: 'designation',
+              title: 'Designation',
+              type: 'string',
+              description: 'Job title or role of the person (e.g., "Chief Technology Officer").',
+            }),
+          ],
+        },
+      ],
+    }),
+    defineField({
       name: 'featuredImage',
       title: 'Featured Image',
       type: 'image',
       options: {hotspot: true},
+      description: 'Image used for thumbnails, hero sections, and social media previews.',
       fields: [
         defineField({
           name: 'alt',
           title: 'Alt Text',
           type: 'string',
           description: 'Alternative text for accessibility and SEO.',
+        }),
+      ],
+    }),
+    defineField({
+      name: 'featuredMedia',
+      title: 'Featured Media',
+      type: 'object',
+      description: 'Main featured content (image or video) displayed in the case study detail page.',
+      fields: [
+        defineField({
+          name: 'type',
+          title: 'Media Type',
+          type: 'string',
+          options: {
+            list: [
+              { title: 'Image', value: 'image' },
+              { title: 'Video', value: 'video' },
+            ],
+            layout: 'radio',
+          },
+          initialValue: 'image',
+        }),
+        defineField({
+          name: 'image',
+          title: 'Image',
+          type: 'image',
+          options: { hotspot: true },
+          hidden: ({ parent }) => parent?.type !== 'image',
+          fields: [
+            defineField({
+              name: 'alt',
+              title: 'Alt Text',
+              type: 'string',
+              description: 'Alternative text for accessibility and SEO.',
+            }),
+          ],
+        }),
+        defineField({
+          name: 'videoFile',
+          title: 'Video File',
+          type: 'file',
+          options: {
+            accept: 'video/*',
+          },
+          hidden: ({ parent }) => parent?.type !== 'video',
+          description: 'Upload a video file (MP4, WebM, etc.).',
+        }),
+        defineField({
+          name: 'videoUrl',
+          title: 'Video URL',
+          type: 'url',
+          hidden: ({ parent }) => parent?.type !== 'video',
+          description: 'Optional: YouTube, Vimeo, or other video URL. Use this or upload a video file.',
         }),
       ],
     }),
@@ -137,7 +223,7 @@ export default defineType({
           name: 'ogImage',
           title: 'Open Graph Image',
           type: 'image',
-          description: 'Image for social media shares (1200x630px recommended). Falls back to Featured Image if not set.',
+          description: 'Image for social media shares (1200x630px recommended). Falls back to Featured Media if not set.',
         }),
       ],
     }),

@@ -191,39 +191,39 @@ export function CaseStudiesList({ caseStudies }: CaseStudiesListProps) {
             <Link
               key={study._id}
               href={`/case-studies/${study.slug}`}
-              className="group flex flex-col hover:bg-white dark:hover:bg-white/5 border border-gray-200 dark:border-secondary-800 p-6 hover:scale-105 hover:shadow-xl rounded-3xl transition-all duration-300"
+              className="group flex flex-col md:flex-row hover:bg-white dark:hover:bg-white/5 border border-gray-200 dark:border-secondary-800 p-6 hover:scale-105 hover:shadow-xl rounded-3xl transition-all duration-300 gap-6"
             >
               {study.featuredImage?.asset?.url && (
-                <div className="relative aspect-[16/9] overflow-hidden rounded-lg bg-gray-100 dark:bg-secondary-700 mb-4">
+                <div className="relative w-full md:w-20 md:h-20 md:flex-shrink-0 aspect-[16/9] md:aspect-[3/4] overflow-hidden rounded-lg bg-gray-100 dark:bg-secondary-700">
                   <Image
                     src={study.featuredImage.asset.url}
                     alt={study.featuredImage.asset.altText || study.title || "Case study"}
                     fill
                     className="object-cover transition-transform duration-300 group-hover:scale-105"
-                    sizes="(min-width: 1024px) 480px, 100vw"
+                    sizes="(min-width: 768px) 160px, 100vw"
                   />
                 </div>
               )}
-              <div className="space-y-3 flex-grow flex flex-row justify-between ">
-                <div className="w-full h-full">
+              <div className="flex-grow flex flex-col md:flex-row justify-between gap-4 min-w-0">
+                <div className="flex-grow min-w-0">
                   {study.kicker && (
                     <div className="text-sm font-semibold uppercase tracking-wider text-primary">
                       {study.kicker}
                     </div>
                   )}
-                  <h2 className="!font-metrophobic text-gray-900 dark:text-secondary-100 text-2xl md:text-3xl leading-tight tracking-tighter mb-4">
+                  <h2 className="!font-metrophobic text-gray-900 dark:text-secondary-100 text-2xl md:text-3xl leading-tight tracking-tighter mb-4 break-words">
                     {study.title}
                   </h2>
                 </div>
-                <div className="w-full flex flex-col h-full items-end justify-between text-right !mt-0">
-                  <div>
+                <div className="flex flex-col items-end md:items-end justify-between text-right md:min-w-[200px] md:max-w-[300px] flex-shrink-0">
+                  <div className="w-full">
                   {study.metricLarge && (
-                    <div className="!font-metrophobic text-4xl font-normal text-primary dark:text-primary-100">
+                    <div className="!font-metrophobic text-4xl font-normal text-primary dark:text-primary-100 break-words whitespace-normal">
                       {study.metricLarge}
                     </div>
                   )}
                   {study.metricContext && (
-                    <p className="text-base md:text-base font-light leading-relaxed text-gray-500 dark:text-secondary-300 max-w-prose">
+                    <p className="text-base md:text-base font-light leading-relaxed text-gray-500 dark:text-secondary-300 break-words">
                       {study.metricContext}
                     </p>
                   )}

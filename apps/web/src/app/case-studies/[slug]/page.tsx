@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { PortableText } from "@portabletext/react";
 import { client } from "@/lib/sanity.client";
 import { CASE_STUDY_QUERY } from "@/lib/sanity.queries";
 import { ContactCTA } from "@/components/sections/ContactCTA";
@@ -9,6 +10,7 @@ import { ContentHero } from "@/components/sections/ContentHero";
 import { ScrollFadeArrow } from "@/components/ui/ScrollFadeArrow";
 import { ScrollColorTransition } from "@/components/sections/ScrollColorTransition";
 import { SectionHeader } from "@/components/sections/SectionHeader";
+import { QuoteCarousel } from "@/components/sections/QuoteCarousel";
 import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 
@@ -17,6 +19,23 @@ interface CaseStudyPageProps {
 }
 
 export const revalidate = 3600;
+
+// Helper function to check if results array has actual content
+function hasResultsContent(results: any[] | null | undefined): boolean {
+  if (!results || !Array.isArray(results) || results.length === 0) {
+    return false;
+  }
+
+  // Check if any block has text content
+  return results.some((block) => {
+    if (block._type === 'block' && block.children) {
+      return block.children.some((child: any) => {
+        return child.text && child.text.trim().length > 0;
+      });
+    }
+    return false;
+  });
+}
 
 export async function generateMetadata({
   params,
@@ -62,6 +81,7 @@ export default async function CaseStudyPage({
         industry={caseStudy.industry}
         executionType={caseStudy.executionType}
         parallaxSpeed={-0.4}
+        image={caseStudy.featuredImage?.asset?.url}
       />
       <ScrollFadeArrow />
       <ScrollColorTransition
@@ -71,8 +91,44 @@ export default async function CaseStudyPage({
         toText="#221F1F" // gray-900
         transitionDistance={50} // Transition over 50% of viewport height
       >
-        <article className="py-20 md:py-20">
-          <div className="mx-auto w-full max-w-container px-4 md:px-16 2xl:px-6 flex flex-col gap-12">
+        <article className="pb-0">
+          <div className="mx-auto w-full max-w-container">
+            {caseStudy.featuredMedia && (
+              <div className="relative aspect-[16/9] overflow-hidden bg-gray-100">
+                {caseStudy.featuredMedia.type === 'image' && caseStudy.featuredMedia.image?.asset?.url ? (
+                  <Image
+                    src={caseStudy.featuredMedia.image.asset.url}
+                    alt={
+                      caseStudy.featuredMedia.image.asset.altText || caseStudy.title
+                    }
+                    fill
+                    className="object-cover"
+                    sizes="(min-width: 1024px) 1024px, 100vw"
+                    priority
+                  />
+                ) : caseStudy.featuredMedia.type === 'video' ? (
+                  <video
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    controls
+                    className="w-full h-full object-cover"
+                    poster={caseStudy.featuredMedia.image?.asset?.url || caseStudy.featuredImage?.asset?.url}
+                  >
+                    {caseStudy.featuredMedia.videoFile?.asset?.url && (
+                      <source src={caseStudy.featuredMedia.videoFile.asset.url} type="video/mp4" />
+                    )}
+                    {caseStudy.featuredMedia.videoUrl && !caseStudy.featuredMedia.videoFile?.asset?.url && (
+                      <source src={caseStudy.featuredMedia.videoUrl} />
+                    )}
+                    Your browser does not support the video tag.
+                  </video>
+                ) : null}
+              </div>
+            )}
+          </div>
+          <div className="mx-auto w-full max-w-container px-0 md:px-16 2xl:px-6 flex flex-col gap-12">
             <div className="w-full flex-col justify-center">
 
               {/* <header className="space-y-6 text-center">
@@ -98,24 +154,8 @@ export default async function CaseStudyPage({
               </div>
               </header> */}
 
-
-              {caseStudy.featuredImage?.asset?.url && (
-                <div className="relative aspect-[16/9] overflow-hidden rounded-lg bg-gray-100">
-                  <Image
-                    src={caseStudy.featuredImage.asset.url}
-                    alt={
-                      caseStudy.featuredImage.asset.altText || caseStudy.title
-                    }
-                    fill
-                    className="object-cover"
-                    sizes="(min-width: 1024px) 1024px, 100vw"
-                    priority
-                  />
-                </div>
-              )}
-
-              <section className="max-w-4xl mx-auto flex gap-12 justify-between py-20">
-                <div className="space-y-6 w-1/2">
+              <section className="mx-auto flex flex-col md:flex-row gap-12 justify-between py-12 px-4 md:px-0 md:py-20">
+                <div className="space-y-6 w-full md:w-1/2">
                   {caseStudy.challenge && (
                     <div>
                       <SectionHeader
@@ -131,7 +171,7 @@ export default async function CaseStudyPage({
                   )}
                 </div>
                 {(caseStudy.metricLarge || caseStudy.metricContext) && (
-                  <div className="space-y-4 w-1/2 text-right">
+                  <div className="space-y-4 w-full md:w-1/2 text-center md:text-right">
                     <p className="text-sm font-semibold uppercase tracking-wider text-secondary">
                       Headline Result
                     </p>
@@ -150,7 +190,7 @@ export default async function CaseStudyPage({
               </section>
 
               <section className="py-20">
-                <div className="mx-auto w-full max-w-container px-4 md:px-16 2xl:px-6 flex flex-col gap-12">
+                <div className="mx-auto w-full max-w-container px-0 md:px-16 2xl:px-6 flex flex-col gap-12">
                   <div className="w-full flex justify-center">
                     {caseStudy.solution && (
                       // <div>
@@ -164,7 +204,7 @@ export default async function CaseStudyPage({
                       //     {caseStudy.solution}
                       //   </p>
                       // </div>
-                      <div className="w-full bg-secondary-300/20 border border-secondary-300/50 flex flex-col md:flex-row items-center justify-between p-6 md:p-8 rounded-3xl backdrop-blur-sm shadow-lg">
+                      <div className="w-full bg-secondary-300/20 border border-secondary-300/50 flex flex-col md:flex-row items-center justify-between p-6 md:p-8 rounded-none md:rounded-3xl backdrop-blur-sm shadow-lg">
                         <p className="!font-metrophobic w-full md:w-1/2 text-4xl md:text-6xl font-bold mb-4" style={{ color: 'inherit' }}>
                           Solution
                         </p>
@@ -177,21 +217,78 @@ export default async function CaseStudyPage({
                 </div>
               </section>
 
-              {/* {caseStudy.results && (
-                <section className="space-y-6">
-                  <h2 className="text-2xl font-semibold text-dark">
-                    Results
-                  </h2>
-                  <div className="prose prose-lg max-w-none">
-                    <PortableText value={caseStudy.results} />
+              {caseStudy.results && (
+                <section className="py-20">
+                  <div className="mx-auto w-full max-w-container px-4 md:px-16 2xl:px-6 flex flex-col gap-12">
+                    <div className="mx-auto">
+                      <SectionHeader
+                        title="Results"
+                        align="left"
+                        titleClassName="text-gray-900"
+                      />
+                      <div className="mt-8">
+                        <PortableText
+                          value={caseStudy.results}
+                          components={{
+                            block: {
+                              h2: ({ children }) => (
+                                <h2 className="!font-metrophobic text-3xl font-normal text-gray-800 mt-8 mb-4">
+                                  {children}
+                                </h2>
+                              ),
+                              h3: ({ children }) => (
+                                <h3 className="!font-metrophobic text-2xl font-normal text-gray-800 mt-6 mb-3">
+                                  {children}
+                                </h3>
+                              ),
+                              p: ({ children }) => (
+                                <p className="text-xl font-light leading-relaxed text-gray-800 mb-6">
+                                  {children}
+                                </p>
+                              ),
+                              normal: ({ children }) => (
+                                <p className="text-xl font-light leading-relaxed text-gray-800 mb-6">
+                                  {children}
+                                </p>
+                              ),
+                              blockquote: ({ children }) => (
+                                <blockquote className="border-l-4 border-primary pl-6 my-6 text-xl font-light italic text-gray-700">
+                                  {children}
+                                </blockquote>
+                              ),
+                            },
+                            list: {
+                              bullet: ({ children }) => (
+                                <ul className="list-disc list-outside space-y-3 text-xl font-light text-gray-600 mb-6 pl-6">
+                                  {children}
+                                </ul>
+                              ),
+                              number: ({ children }) => (
+                                <ol className="list-decimal list-outside space-y-3 text-xl font-light text-gray-600 mb-6 pl-6">
+                                  {children}
+                                </ol>
+                              ),
+                            },
+                            listItem: {
+                              bullet: ({ children }) => (
+                                <li className="pl-2">{children}</li>
+                              ),
+                              number: ({ children }) => (
+                                <li className="pl-2">{children}</li>
+                              ),
+                            },
+                          }}
+                        />
+                      </div>
+                    </div>
                   </div>
                 </section>
-              )} */}
+              )}
 
               {caseStudy.technologiesUsed && (
                 <section className="py-12">
                   <div className="mx-auto w-full max-w-container px-4 md:px-16 2xl:px-6 flex flex-col gap-12">
-                    <div className="w-full flex flex-row md:flex-col gap-4 text-center justify-center">
+                    <div className="w-full flex flex-col md:flex-col gap-4 text-center justify-center">
                       <div className="w-full ">
                         <h2 className="text-2xl font-semibold text-dark">
                           Technologies Used
@@ -213,15 +310,27 @@ export default async function CaseStudyPage({
                   </div>
                 </section>
               )}
+
             </div>
           </div>
+          <div>
+            {caseStudy.clientQuotes && caseStudy.clientQuotes.length > 0 && (
+              <section>
+                <div className="mx-auto w-full max-w-container px-4 md:px-16 2xl:px-6 bg-gray-100 py-12">
+                  <div className="max-w-4xl mx-auto">
+                    <QuoteCarousel quotes={caseStudy.clientQuotes} />
+                  </div>
+                </div>
+              </section>
+            )}
+          </div>
         </article>
-        <section className="py-8">
+        <section className="py-8 bg-gray-100">
           <div className="mx-auto w-full max-w-container px-4 md:px-16 2xl:px-6 flex justify-center">
             <Button
               variant="outline"
               href="/case-studies"
-              className="items-center gap-2 !text-secondary-700 hover:text-secondary-900 transition-colors font-medium rounded-lg border !border-secondary-200 bg-secondary-50 hover:!bg-primary-100 px-4 py-2"
+              className="items-center gap-2 !text-secondary-700 transition-colors font-medium rounded-lg border !border-secondary-200 bg-gray-50 hover:!bg-secondary-100 px-4 py-2"
             >
               <ArrowLeft className="w-4 h-4" /> Back to All Case Studies
             </Button>

@@ -158,6 +158,23 @@ export const CASE_STUDIES_QUERY = groq`
         url,
         altText
       }
+    },
+    featuredMedia{
+      type,
+      image{
+        asset->{
+          _id,
+          url,
+          altText
+        }
+      },
+      videoFile{
+        asset->{
+          _id,
+          url
+        }
+      },
+      videoUrl
     }
   }
 `;
@@ -177,12 +194,34 @@ export const CASE_STUDY_QUERY = groq`
     solution,
     results,
     technologiesUsed,
+    clientQuotes[]{
+      text,
+      name,
+      designation
+    },
     featuredImage{
       asset->{
         _id,
         url,
         altText
       }
+    },
+    featuredMedia{
+      type,
+      image{
+        asset->{
+          _id,
+          url,
+          altText
+        }
+      },
+      videoFile{
+        asset->{
+          _id,
+          url
+        }
+      },
+      videoUrl
     },
     seo{
       title,
