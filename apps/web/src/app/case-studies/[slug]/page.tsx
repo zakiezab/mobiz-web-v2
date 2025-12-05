@@ -75,7 +75,7 @@ export default async function CaseStudyPage({
         transitionDistance={50} // Transition over 50% of viewport height
       >
         <article className="pb-0">
-          <div className="mx-auto w-full max-w-container">
+          <div className="mx-auto w-full">
             {caseStudy.featuredMedia && (
               <div className="relative aspect-[16/9] overflow-hidden bg-gray-100">
                 {caseStudy.featuredMedia.type === 'image' && caseStudy.featuredMedia.image?.asset?.url ? (
@@ -299,7 +299,7 @@ export default async function CaseStudyPage({
           <div>
             {caseStudy.clientQuotes && caseStudy.clientQuotes.length > 0 && (
               <section>
-                <div className="mx-auto w-full max-w-container px-4 md:px-16 2xl:px-6 bg-gray-100 py-12">
+                <div className="mx-auto w-full px-4 md:px-16 2xl:px-6 bg-gray-100 py-12">
                   <div className="max-w-4xl mx-auto">
                     <QuoteCarousel quotes={caseStudy.clientQuotes} />
                   </div>

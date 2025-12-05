@@ -26,7 +26,7 @@ export function ServicesGrid({
   services,
 }: ServicesGridProps) {
   return (
-    <section id={id} className="bg-gray-50 dark:bg-dark py-4 md:py-12">
+    <section id={id} className="bg-secondary-200 dark:bg-secondary-800 py-4 md:py-12">
       <div className="mx-auto w-full max-w-container px-4 md:px-16 2xl:px-6">
         {/* {showHeader && (
           <div className="mb-12 md:mb-20">

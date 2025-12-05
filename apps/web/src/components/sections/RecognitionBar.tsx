@@ -58,15 +58,15 @@ export function RecognitionBar({items}: RecognitionBarProps) {
   }
 
   return (
-    <section ref={sectionRef} className="bg-white dark:bg-dark py-16">
+    <section ref={sectionRef} className="bg-gradient-to-t from-secondary-200 dark:from-secondary-800 to-white dark:to-dark py-16">
       <div className="mx-auto w-full max-w-container px-4 md:px-24 text-center">
         <div 
-          className="grid gap-16 md:grid-cols-3 rounded-3xl p-8 bg-gradient-to-l from-gray-50 dark:from-secondary-300/10 to-gray-100 dark:to-secondary-600/10 border border-gray-200 dark:border-secondary-200/20"
+          className="grid gap-16 md:grid-cols-3 rounded-3xl p-8 bg-gradient-to-l from-gray-50 dark:from-secondary-300/50 to-gray-100 dark:to-secondary-600/10 border border-gray-200 dark:border-secondary-200/20"
           style={shadowStyle}
         >
           {items.map((item) => (
             <div key={item.label} className="text-center">
-              <div className="text-base uppercase tracking-wider text-gray-500 dark:text-secondary-300 mb-5">
+              <div className="text-base uppercase tracking-wider text-gray-500 dark:text-primary mb-5">
                 {item.label}
               </div>
               <div className="!font-metrophobic text-3xl text-gray-900 dark:text-secondary-100 leading-tight tracking-tighter mb-2">
